@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class UsersChallengeConfig(AppConfig):
+class ChallengeConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'users_challenge'
+    name = 'challenges'

@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class UsersGameConfig(AppConfig):
+class ChallengeThemeConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'users_game'
+    name = 'challenge_themes'

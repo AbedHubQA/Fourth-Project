@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class LeaderboardConfig(AppConfig):
+class ChallengeDifficultyConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'leaderboard'
+    name = 'challenge_difficulties'
