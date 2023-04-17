@@ -13,7 +13,6 @@ class Leaderboard(models.Model):
         related_name='leaderboard_entries'
     )
     total_points = models.IntegerField()
-    rank = models.IntegerField()
 
     def __str__(self):
         return f'{self.user.username} - {self.game.id} - Rank: {self.rank}'

@@ -6,6 +6,7 @@ from lib.exceptions import exceptions
 from .models import Challenge
 from user_challenges.models import User_Challenge
 from user_games.models import User_Game
+from leaderboards.models import Leaderboard
 from challenge_difficulties.models import Challenge_Difficulty
 from challenge_themes.models import Challenge_Theme
 from .serializers.common import ChallengeSerializer, GetChallengeSerializer, SubmitChallengeSerializer
@@ -14,7 +15,7 @@ import random
 # Create your views here.
 
 
-class GetChallengeSections(APIView):
+class GetChallengeSectionsView(APIView):
     @exceptions
     def get(self, request):
         difficulties = Challenge_Difficulty.objects.all()
@@ -35,7 +36,7 @@ class GetChallengeSections(APIView):
         return Response(challenge_sections)
 
 
-class GetChallenge(APIView):
+class GetChallengeView(APIView):
     @exceptions
     def post(self, request):
         
@@ -48,7 +49,7 @@ class GetChallenge(APIView):
 
         challenges = Challenge.objects.filter(
             difficulty=difficulty_id, theme=theme_id)
-        print('TESTIJG THIS', challenges)
+
         challenge = random.choice(challenges)
         challenge_serializer = ChallengeSerializer(challenge)
 
@@ -60,7 +61,7 @@ class GetChallenge(APIView):
         return Response(response_data)
 
 
-class SubmitChallenge(APIView):
+class SubmitChallengeView(APIView):
     @exceptions
     def post(self, request):
         
@@ -75,6 +76,7 @@ class SubmitChallenge(APIView):
 
         challenge = Challenge.objects.get(id=challenge_id)
         user_game = User_Game.objects.get(id=game_id)
+        leaderboard_entry = Leaderboard.objects.get(game_id=game_id)
 
         is_correct = user_answer.lower() == challenge.solution.lower()
 
@@ -98,6 +100,9 @@ class SubmitChallenge(APIView):
         user_game.total_score += points_scored
         user_game.is_completed = request.data.get('is_last_challenge', False)
         user_game.save()
+
+        leaderboard_entry.total_points = user_game.total_score
+        leaderboard_entry.save()
 
         response_data = {
             'is_correct': is_correct,

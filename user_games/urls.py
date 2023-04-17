@@ -1,7 +1,7 @@
 from django.urls import path
-from .views import StartGame
+from .views import StartGameView
 
 # Any request hitting this urlpatterns list is: /api/sightings/
 urlpatterns = [
-    path('', StartGame.as_view())
+    path('', StartGameView.as_view())
 ]
