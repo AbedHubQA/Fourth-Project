@@ -21,3 +21,16 @@ class RegisterView(APIView):
         user_to_add.is_valid(raise_exception=True)
         user_to_add.save()
         return Response(user_to_add.data, status.HTTP_201_CREATED)
+
+class LoginView(APIView):
+    @exceptions
+    def post(self, request):
+        email = request.data['email']
+        password = request.data['password']
+        user_to_login = User.objects.get(email=email)
+        if not user_to_login.check_password(password):
+            raise PermissionDenied('Unauthorized')
+        dt = datetime.now() + timedelta(days=7)
+        token = jwt.encode({'sub':  user_to_login.id, 'exp': int(
+            dt.strftime('%s'))}, settings.SECRET_KEY, algorithm='HS256')
+        return Response({'token': token})
