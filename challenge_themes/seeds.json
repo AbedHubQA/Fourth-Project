@@ -1,0 +1,16 @@
+[
+  {
+    "model": "challenge_themes.challenge_theme",
+    "pk": 1,
+    "fields": {
+      "theme_name": "Sports"
+    }
+  },
+  {
+    "model": "challenge_themes.challenge_theme",
+    "pk": 2,
+    "fields": {
+      "theme_name": "Media"
+    }
+  }
+]

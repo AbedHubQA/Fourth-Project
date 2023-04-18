@@ -1,0 +1,110 @@
+[
+  {
+    "model": "leaderboards.leaderboard",
+    "pk": 1,
+    "fields": {
+      "user": 4,
+      "game": 1,
+      "total_points": 6500
+    }
+  },
+  {
+    "model": "leaderboards.leaderboard",
+    "pk": 2,
+    "fields": {
+      "user": 4,
+      "game": 2,
+      "total_points": 3400
+    }
+  },
+  {
+    "model": "leaderboards.leaderboard",
+    "pk": 3,
+    "fields": {
+      "user": 4,
+      "game": 3,
+      "total_points": 1900
+    }
+  },
+  {
+    "model": "leaderboards.leaderboard",
+    "pk": 4,
+    "fields": {
+      "user": 2,
+      "game": 4,
+      "total_points": 7200
+    }
+  },
+  {
+    "model": "leaderboards.leaderboard",
+    "pk": 5,
+    "fields": {
+      "user": 2,
+      "game": 5,
+      "total_points": 2400
+    }
+  },
+  {
+    "model": "leaderboards.leaderboard",
+    "pk": 6,
+    "fields": {
+      "user": 2,
+      "game": 6,
+      "total_points": 4200
+    }
+  },
+  {
+    "model": "leaderboards.leaderboard",
+    "pk": 7,
+    "fields": {
+      "user": 3,
+      "game": 7,
+      "total_points": 5300
+    }
+  },
+  {
+    "model": "leaderboards.leaderboard",
+    "pk": 8,
+    "fields": {
+      "user": 3,
+      "game": 8,
+      "total_points": 2700
+    }
+  },
+  {
+    "model": "leaderboards.leaderboard",
+    "pk": 9,
+    "fields": {
+      "user": 3,
+      "game": 9,
+      "total_points": 8200
+    }
+  },
+  {
+    "model": "leaderboards.leaderboard",
+    "pk": 10,
+    "fields": {
+      "user": 5,
+      "game": 10,
+      "total_points": 5100
+    }
+  },
+  {
+    "model": "leaderboards.leaderboard",
+    "pk": 11,
+    "fields": {
+      "user": 5,
+      "game": 11,
+      "total_points": 3900
+    }
+  },
+  {
+    "model": "leaderboards.leaderboard",
+    "pk": 12,
+    "fields": {
+      "user": 5,
+      "game": 12,
+      "total_points": 4100
+    }
+  }
+]

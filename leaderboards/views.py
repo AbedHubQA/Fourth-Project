@@ -6,13 +6,14 @@ from rest_framework import status
 from .models import Leaderboard
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 from rest_framework.exceptions import PermissionDenied
-
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from lib.exceptions import exceptions
 
 # Create your views here.
 
 class LeaderboardListView(APIView):
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     @exceptions
     def get(self, request):
         leaderboard_entries = Leaderboard.objects.all().order_by('-total_points')
@@ -25,6 +26,7 @@ class LeaderboardListView(APIView):
         return Response(serialized_leaderboard.data)
 
 class DeleteLeaderboardEntry(APIView):
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     @exceptions
     def delete(self, request, pk):
         entry_to_delete = Leaderboard.objects.get(pk=pk)

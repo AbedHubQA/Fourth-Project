@@ -1,0 +1,30 @@
+[
+  {
+    "model": "challenge_difficulties.challenge_difficulty",
+    "pk": 1,
+    "fields": {
+      "difficulty_name": "Bronze"
+    }
+  },
+  {
+    "model": "challenge_difficulties.challenge_difficulty",
+    "pk": 2,
+    "fields": {
+      "difficulty_name": "Silver"
+    }
+  },
+  {
+    "model": "challenge_difficulties.challenge_difficulty",
+    "pk": 3,
+    "fields": {
+      "difficulty_name": "Gold"
+    }
+  },
+  {
+    "model": "challenge_difficulties.challenge_difficulty",
+    "pk": 4,
+    "fields": {
+      "difficulty_name": "Platinum"
+    }
+  }
+]

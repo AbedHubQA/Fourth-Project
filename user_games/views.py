@@ -7,9 +7,11 @@ from .models import User_Game
 from leaderboards.models import Leaderboard
 from .serializers.common import UserGameSerializer
 from .serializers.populated import PopulatedUserGameSerializer
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 # Create your views here.
 class StartGameView(APIView):
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     @exceptions
     def post(self, request):
         user_game = User_Game(user=request.user)

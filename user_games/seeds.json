@@ -1,0 +1,134 @@
+[
+  {
+    "model": "user_games.user_game",
+    "pk": 1,
+    "fields": {
+      "user": 4,
+      "start_time": "2023-04-18T01:59:14.308682Z",
+      "end_time": "2023-04-18T02:04:14.308682Z",
+      "total_score": 6500,
+      "is_completed": true
+    }
+  },
+  {
+    "model": "user_games.user_game",
+    "pk": 2,
+    "fields": {
+      "user": 4,
+      "start_time": "2023-04-18T01:59:14.308682Z",
+      "end_time": "2023-04-18T02:04:14.308682Z",
+      "total_score": 3400,
+      "is_completed": true
+    }
+  },
+  {
+    "model": "user_games.user_game",
+    "pk": 3,
+    "fields": {
+      "user": 4,
+      "start_time": "2023-04-18T01:59:14.308682Z",
+      "end_time": "2023-04-18T02:04:14.308682Z",
+      "total_score": 1900,
+      "is_completed": true
+    }
+  },
+  {
+    "model": "user_games.user_game",
+    "pk": 4,
+    "fields": {
+      "user": 2,
+      "start_time": "2023-04-18T01:59:14.308682Z",
+      "end_time": "2023-04-18T02:04:14.308682Z",
+      "total_score": 7200,
+      "is_completed": true
+    }
+  },
+  {
+    "model": "user_games.user_game",
+    "pk": 5,
+    "fields": {
+      "user": 2,
+      "start_time": "2023-04-18T01:59:14.308682Z",
+      "end_time": "2023-04-18T02:04:14.308682Z",
+      "total_score": 2400,
+      "is_completed": true
+    }
+  },
+  {
+    "model": "user_games.user_game",
+    "pk": 6,
+    "fields": {
+      "user": 2,
+      "start_time": "2023-04-18T01:59:14.308682Z",
+      "end_time": "2023-04-18T02:04:14.308682Z",
+      "total_score": 4200,
+      "is_completed": true
+    }
+  },
+  {
+    "model": "user_games.user_game",
+    "pk": 7,
+    "fields": {
+      "user": 3,
+      "start_time": "2023-04-18T01:59:14.308682Z",
+      "end_time": "2023-04-18T02:04:14.308682Z",
+      "total_score": 5300,
+      "is_completed": true
+    }
+  },
+  {
+    "model": "user_games.user_game",
+    "pk": 8,
+    "fields": {
+      "user": 3,
+      "start_time": "2023-04-18T01:59:14.308682Z",
+      "end_time": "2023-04-18T02:04:14.308682Z",
+      "total_score": 2700,
+      "is_completed": true
+    }
+  },
+  {
+    "model": "user_games.user_game",
+    "pk": 9,
+    "fields": {
+      "user": 3,
+      "start_time": "2023-04-18T01:59:14.308682Z",
+      "end_time": "2023-04-18T02:04:14.308682Z",
+      "total_score": 8200,
+      "is_completed": true
+    }
+  },
+  {
+    "model": "user_games.user_game",
+    "pk": 10,
+    "fields": {
+      "user": 5,
+      "start_time": "2023-04-18T01:59:14.308682Z",
+      "end_time": "2023-04-18T02:04:14.308682Z",
+      "total_score": 5100,
+      "is_completed": true
+    }
+  },
+  {
+    "model": "user_games.user_game",
+    "pk": 11,
+    "fields": {
+      "user": 5,
+      "start_time": "2023-04-18T01:59:14.308682Z",
+      "end_time": "2023-04-18T02:04:14.308682Z",
+      "total_score": 3900,
+      "is_completed": true
+    }
+  },
+  {
+    "model": "user_games.user_game",
+    "pk": 12,
+    "fields": {
+      "user": 5,
+      "start_time": "2023-04-18T01:59:14.308682Z",
+      "end_time": "2023-04-18T02:04:14.308682Z",
+      "total_score": 4100,
+      "is_completed": true
+    }
+  }
+]

@@ -1,0 +1,266 @@
+[
+  {
+    "model": "challenges.challenge",
+    "pk": 1,
+    "fields": {
+      "difficulty": 1,
+      "theme": 1,
+      "solution": "LeBron James",
+      "hint": "NBA superstar",
+      "image_url": "https://img.olympicchannel.com/images/image/private/t_s_w960/t_s_16_9_g_auto/f_auto/primary/c5r52rbifxn2srhp9no0"
+    }
+  },
+  {
+    "model": "challenges.challenge",
+    "pk": 2,
+    "fields": {
+      "difficulty": 1,
+      "theme": 1,
+      "solution": "Lionel Messi",
+      "hint": "Greatest ever footballer",
+      "image_url": "https://cdn.britannica.com/35/238335-050-2CB2EB8A/Lionel-Messi-Argentina-Netherlands-World-Cup-Qatar-2022.jpg"
+    }
+  },
+  {
+    "model": "challenges.challenge",
+    "pk": 3,
+    "fields": {
+      "difficulty": 1,
+      "theme": 1,
+      "solution": "Serena Williams",
+      "hint": "Tennis champion",
+      "image_url": "https://media.npr.org/assets/img/2022/08/09/gettyimages-460481071-fd0a7ea9c5d5268965b418120c714c2b3ab261c5.jpg"
+    }
+  },
+  {
+    "model": "challenges.challenge",
+    "pk": 4,
+    "fields": {
+      "difficulty": 1,
+      "theme": 2,
+      "solution": "Taylor Swift",
+      "hint": "Pop star",
+      "image_url": "https://pyxis.nymag.com/v1/imgs/277/008/300105da77cf0cfa6cf23614fa8cce8cc0-taylor-swift.jpg"
+    }
+  },
+  {
+    "model": "challenges.challenge",
+    "pk": 5,
+    "fields": {
+      "difficulty": 1,
+      "theme": 2,
+      "solution": "Adele",
+      "hint": "Grammy-winning British singer",
+      "image_url": "https://www.thetimes.co.uk/imageserver/image/%2Fmethode%2Ftimes%2Fprod%2Fweb%2Fbin%2F44b7e16a-c8c3-11ed-82d6-a363978c4bcb.jpg?crop=2296%2C1530%2C9%2C206"
+    }
+  },
+  {
+    "model": "challenges.challenge",
+    "pk": 6,
+    "fields": {
+      "difficulty": 1,
+      "theme": 2,
+      "solution": "Stephen Fry",
+      "hint": "Actor and comedian",
+      "image_url": "https://cdn.comedy.co.uk/images/library/comedies/900x450/h/horrible_histories_sf.jpg"
+    }
+  },
+  {
+    "model": "challenges.challenge",
+    "pk": 7,
+    "fields": {
+      "difficulty": 2,
+      "theme": 1,
+      "solution": "Roger Federer",
+      "hint": "Tennis legend",
+      "image_url": "https://media.newyorker.com/photos/63249cff39ac97c4c23ff5d0/master/w_2560%2Cc_limit/Marzorati%2520-%2520Federer%2520Retirement%25202.jpg"
+    }
+  },
+  {
+    "model": "challenges.challenge",
+    "pk": 8,
+    "fields": {
+      "difficulty": 2,
+      "theme": 1,
+      "solution": "Kobe Bryant",
+      "hint": "Basketball legend",
+      "image_url": "https://imageio.forbes.com/specials-images/imageserve/63bf25f71e20a5e61ee4e9c0/0x0.jpg?format=jpg&crop=1999,1125,x0,y112,safe&width=1200"
+    }
+  },
+  {
+    "model": "challenges.challenge",
+    "pk": 9,
+    "fields": {
+      "difficulty": 2,
+      "theme": 1,
+      "solution": "Maria Sharapova",
+      "hint": "Russian tennis player",
+      "image_url": "https://static.independent.co.uk/2023/02/26/06/825d3ea6fe51c1e169e8a31dcbaf7126Y29udGVudHNlYXJjaGFwaSwxNjc3Mzk3MTYy-2.43877858.jpg"
+    }
+  },
+  {
+    "model": "challenges.challenge",
+    "pk": 10,
+    "fields": {
+      "difficulty": 2,
+      "theme": 2,
+      "solution": "Beyonce",
+      "hint": "Queen of Pop",
+      "image_url": "https://wwd.com/wp-content/uploads/2022/08/beyonce-feature-photo.jpg?w=1000&h=563&crop=1"
+    }
+  },
+  {
+    "model": "challenges.challenge",
+    "pk": 11,
+    "fields": {
+      "difficulty": 2,
+      "theme": 2,
+      "solution": "Chris Hemsworth",
+      "hint": "Australian actor",
+      "image_url": "https://hips.hearstapps.com/hmg-prod/images/chris-hemsworth-attends-national-geographics-limitless-news-photo-1669029871.jpg"
+    }
+  },
+  {
+    "model": "challenges.challenge",
+    "pk": 12,
+    "fields": {
+      "difficulty": 2,
+      "theme": 2,
+      "solution": "Jennifer Aniston",
+      "hint": "Friends star",
+      "image_url": "https://hips.hearstapps.com/delish/assets/17/07/1487091926-delish-jennifer-aniston.jpg"
+    }
+  },
+  {
+    "model": "challenges.challenge",
+    "pk": 13,
+    "fields": {
+      "difficulty": 3,
+      "theme": 1,
+      "solution": "Usain Bolt",
+      "hint": "Sprinter from Jamaica",
+      "image_url": "https://imgresizer.eurosport.com/unsafe/1200x1200/smart/filters:format(jpeg)/origin-imgresizer.eurosport.com/2021/06/21/3158053-64716788-2560-1440.jpg"
+    }
+  },
+  {
+    "model": "challenges.challenge",
+    "pk": 14,
+    "fields": {
+      "difficulty": 3,
+      "theme": 1,
+      "solution": "Michael Jordan",
+      "hint": "Basketball GOAT",
+      "image_url": "https://staticg.sportskeeda.com/editor/2022/02/af653-16442505538786-1920.jpg"
+    }
+  },
+  {
+    "model": "challenges.challenge",
+    "pk": 15,
+    "fields": {
+      "difficulty": 3,
+      "theme": 1,
+      "solution": "Luka Modric",
+      "hint": "Greatest midfielder of all time",
+      "image_url": "https://static01.nyt.com/images/2018/12/04/sports/04SOCCER-web/merlin_144148398_f3816ef7-6049-416c-910e-81c3d6657de7-superJumbo.jpg"
+    }
+  },
+  {
+    "model": "challenges.challenge",
+    "pk": 16,
+    "fields": {
+      "difficulty": 3,
+      "theme": 2,
+      "solution": "Tom Cruise",
+      "hint": "Mission: Impossible star",
+      "image_url": "https://media.npr.org/assets/img/2020/05/05/gettyimages-693140990_custom-96572767b03e0e649349fdb6d38d649e6ccaed75.jpg"
+    }
+  },
+  {
+    "model": "challenges.challenge",
+    "pk": 17,
+    "fields": {
+      "difficulty": 3,
+      "theme": 2,
+      "solution": "Emma Watson",
+      "hint": "Harry Potter actress",
+      "image_url": "https://akns-images.eonline.com/eol_images/Entire_Site/2023317/rs_1024x759-230417122054-1024-emma-watson.cm.41723.jpg?fit=around%7C1024:759&output-quality=90&crop=1024:759;center,top"
+    }
+  },
+  {
+    "model": "challenges.challenge",
+    "pk": 18,
+    "fields": {
+      "difficulty": 3,
+      "theme": 2,
+      "solution": "Ryan Reynolds",
+      "hint": "Deadpool actor",
+      "image_url": "https://www.gannett-cdn.com/presto/2020/07/29/USAT/73d9330f-c382-4123-a56d-d61eefb2c373-AP_NY_Premiere_of_Netflixs__6_Underground_.JPG?width=660&height=440&fit=crop&format=pjpg&auto=webp"
+    }
+  },
+  {
+    "model": "challenges.challenge",
+    "pk": 19,
+    "fields": {
+      "difficulty": 4,
+      "theme": 1,
+      "solution": "Muhammad Ali",
+      "hint": "The Greatest",
+      "image_url": "https://content.api.news/v3/images/bin/306f507d1020c55174ed0223adfac2fd"
+    }
+  },
+  {
+    "model": "challenges.challenge",
+    "pk": 20,
+    "fields": {
+      "difficulty": 4,
+      "theme": 1,
+      "solution": "Michael Phelps",
+      "hint": "Swimming legend",
+      "image_url": "https://img.olympicchannel.com/images/image/private/t_s_pog_staticContent_hero_xl_2x/f_auto/primary/hhfs9tf9mck02d8ilnqq"
+    }
+  },
+  {
+    "model": "challenges.challenge",
+    "pk": 21,
+    "fields": {
+      "difficulty": 4,
+      "theme": 1,
+      "solution": "Jesse Owens",
+      "hint": "Track and field athlete",
+      "image_url": "https://api.time.com/wp-content/uploads/2016/02/race.jpeg"
+    }
+  },
+  {
+    "model": "challenges.challenge",
+    "pk": 22,
+    "fields": {
+      "difficulty": 4,
+      "theme": 2,
+      "solution": "Meryl Streep",
+      "hint": "Academy Award winner",
+      "image_url": "https://prod-images.tcm.com/Master-Profile-Images/MerylStreep.185873.3.jpg"
+    }
+  },
+  {
+    "model": "challenges.challenge",
+    "pk": 23,
+    "fields": {
+      "difficulty": 4,
+      "theme": 2,
+      "solution": "Robert De Niro",
+      "hint": "Legendary actor",
+      "image_url": "https://globalnews.ca/wp-content/uploads/2016/06/nyet319-422_2016_002033_high.jpg?quality=85&strip=all"
+    }
+  },
+  {
+    "model": "challenges.challenge",
+    "pk": 24,
+    "fields": {
+      "difficulty": 4,
+      "theme": 2,
+      "solution": "Denzel Washington",
+      "hint": "Two-time Academy Award winner",
+      "image_url": "https://prod-images.tcm.com/Master-Profile-Images/DenzelWashington.jpg"
+    }
+  }
+]

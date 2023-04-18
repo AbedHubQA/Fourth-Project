@@ -11,11 +11,13 @@ from challenge_difficulties.models import Challenge_Difficulty
 from challenge_themes.models import Challenge_Theme
 from .serializers.common import ChallengeSerializer, GetChallengeSerializer, SubmitChallengeSerializer
 import random
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 # Create your views here.
 
 
 class GetChallengeSectionsView(APIView):
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     @exceptions
     def get(self, request):
         difficulties = Challenge_Difficulty.objects.all()
@@ -37,6 +39,7 @@ class GetChallengeSectionsView(APIView):
 
 
 class GetChallengeView(APIView):
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     @exceptions
     def post(self, request):
         
@@ -62,6 +65,7 @@ class GetChallengeView(APIView):
 
 
 class SubmitChallengeView(APIView):
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     @exceptions
     def post(self, request):
         
