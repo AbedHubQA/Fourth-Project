@@ -7,7 +7,6 @@ from django.core.validators import URLValidator
 class User(AbstractUser):
     email = models.CharField(max_length=100, unique=True)
     username = models.CharField(max_length=20, unique=True)
-    profile_image = models.URLField(validators=[URLValidator()])
     is_admin = models.BooleanField(default=False)
     is_demo = models.BooleanField(default=False)
 
