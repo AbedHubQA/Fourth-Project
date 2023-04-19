@@ -12,20 +12,27 @@
   align-items: center;
 }
 
-@media (max-width: 600px) {
-  .avatar, .nav-icons-spacing {
-    height: 30px !important;
-    width: 30px !important;
-    margin-right: 20px !important;
-  }
+.avatar,
+.nav-icons-spacing {
+  height: 30px !important;
+  width: 30px !important;
+  margin-right: 20px !important;
+}
 
-  .nav-icons-sizing {
-    height: 30px !important;
-    width: 30px !important;
-    color: white;
-  }
+.nav-icons-sizing {
+  height: 30px !important;
+  width: 30px !important;
+  color: white;
+}
 
-  .nav-icons-sizing.active-icon {
-    color: #FF9C07 !important;
+.nav-icons-sizing.active-icon {
+  color: #FF9C07 !important;
+}
+
+@media (min-width: 768px) {
+  .avatar {
+    height: 40px !important;
+    width: 40px !important;
+    margin-right: 0px !important;
   }
 }
