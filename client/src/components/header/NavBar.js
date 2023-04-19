@@ -12,14 +12,48 @@ import AppLogo from '../common/AppLogo'
 import CompanyLogo from '../common/CompanyLogo'
 
 function ResponsiveAppBar() {
-  const username = 'A'
+  const username = 'Ali Abed-Ali11111111111'
   const location = useLocation()
 
   const isChallengesActive = location.pathname === '/challenges';
   const isLeaderboardActive = location.pathname === '/leaderboard';
 
+  function stringToColor(string) {
+    let hash = 0;
+    let i;
+  
+    for (i = 0; i < string.length; i += 1) {
+      hash = string.charCodeAt(i) + ((hash << 5) - hash);
+    }
+
+    let color = '#';
+
+    for (i = 0; i < 3; i += 1) {
+      const value = (hash >> (i * 8)) & 0xff;
+      color += `00${value.toString(16)}`.slice(-2);
+    }
+  
+    return color;
+  }
+  
+  function stringAvatar(name) {
+    const names = name.split(' ');
+    let children = '';
+    if (names.length === 1) {
+      children = `${name[0]}`;
+    } else {
+      children = `${names[0][0]}${names[1][0]}`;
+    }
+    return {
+      sx: {
+        bgcolor: stringToColor(name),
+      },
+      children,
+    };
+  }
+
   return (
-    <AppBar position="static" sx={{ background: 'black', boxShadow: 'none' }}>
+    <AppBar position="static" className='navbar-total' sx={{ background: 'black', boxShadow: 'none' }}>
       <Toolbar>
         <Box sx={{ flexGrow: 1, alignItems: 'center' }}>
           <Box sx={{ display: { xs: 'none', md: 'flex', sm: 'flex' } }}>
@@ -105,7 +139,8 @@ function ResponsiveAppBar() {
             </NavLink>
           </div>
         </Box>
-        <Avatar className='avatar' sx={{ cursor: 'pointer' }}>{username[0].toUpperCase()}</Avatar>
+        {/* <Avatar className='avatar' sx={{ cursor: 'pointer' }}>{username[0].toUpperCase()}</Avatar> */}
+        <Avatar className='avatar' sx={{ cursor: 'pointer' }} {...stringAvatar(username)}></Avatar>
       </Toolbar>
     </AppBar>
   );

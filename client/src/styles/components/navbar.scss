@@ -1,8 +1,10 @@
 .avatar {
-  background-color: purple !important;
+  height: 30px !important;
+  width: 30px !important;
 }
 
 .css-1kj8bmn-MuiTypography-root {
+  // this relates to the Leaderboard text
   margin: 0 24px !important;
 }
 
@@ -12,7 +14,6 @@
   align-items: center;
 }
 
-.avatar,
 .nav-icons-spacing {
   height: 30px !important;
   width: 30px !important;
