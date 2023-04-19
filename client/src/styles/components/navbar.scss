@@ -1,0 +1,31 @@
+.avatar {
+  background-color: purple !important;
+}
+
+.css-1kj8bmn-MuiTypography-root {
+  margin: 0 24px !important;
+}
+
+.mobile-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media (max-width: 600px) {
+  .avatar, .nav-icons-spacing {
+    height: 30px !important;
+    width: 30px !important;
+    margin-right: 20px !important;
+  }
+
+  .nav-icons-sizing {
+    height: 30px !important;
+    width: 30px !important;
+    color: white;
+  }
+
+  .nav-icons-sizing.active-icon {
+    color: #FF9C07 !important;
+  }
+}
