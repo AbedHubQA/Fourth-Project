@@ -1,4 +1,3 @@
-import * as React from 'react'
 import HeaderBanner from '../header/Header'
 import FirstSection from '../home/FirstSection'
 import SecondSection from '../home/SecondSection'

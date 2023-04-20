@@ -20,7 +20,14 @@
       "jsx": true
     }
   },
+  "settings": {
+    "react": {
+      "version": "detect",
+      "runtime": "automatic"
+    }
+  },
   "rules": {
+    "react/react-in-jsx-scope": "off",
     "brace-style": "error",
     "camelcase": [
       "error",
@@ -69,10 +76,7 @@
       "error",
       "single"
     ],
-    "semi": [
-      "error",
-      "never"
-    ],
+    "semi": "off",
     "comma-dangle": [
       "error",
       {

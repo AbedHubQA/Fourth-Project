@@ -1,4 +1,3 @@
-import React from 'react'
 import HeaderImage from '../../assets/images/header.png'
 
 // eslint-disable-next-line react/prop-types

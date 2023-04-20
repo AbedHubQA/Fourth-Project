@@ -1,4 +1,3 @@
-import React from 'react'
 import CompanyLogo from '../../assets/images/logo.png'
 
 function AppLogo() {

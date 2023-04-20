@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import HomePage from './components/pages/HomePage'
 import ChallengesPage from './components/pages/ChallengesPage'
