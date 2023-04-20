@@ -6,6 +6,8 @@ from rest_framework.exceptions import PermissionDenied
 import jwt
 from datetime import datetime, timedelta
 from django.conf import settings
+from rest_framework.permissions import IsAuthenticated
+
 
 from lib.exceptions import exceptions
 
@@ -34,3 +36,11 @@ class LoginView(APIView):
         token = jwt.encode({'sub':  user_to_login.id, 'exp': int(
             dt.strftime('%s'))}, settings.SECRET_KEY, algorithm='HS256')
         return Response({'token': token})
+
+class UserProfileView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+        serialized_user = UserSerializer(user)
+        return Response(serialized_user.data)
