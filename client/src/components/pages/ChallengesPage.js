@@ -8,7 +8,7 @@ const ChallengesPage = () => {
   return (
     <>
       <HeaderBanner headerText={headerText} />
-      {/* <ChallengesBanner /> */}
+      <ChallengesBanner />
       <ChallengeGrid />
     </>
   )
