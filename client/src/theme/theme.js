@@ -1,4 +1,4 @@
-import { createTheme } from '@mui/material/styles';
+import { createTheme } from '@mui/material/styles'
 
 const customTheme = createTheme({
   breakpoints: {
@@ -10,6 +10,6 @@ const customTheme = createTheme({
       xl: 1536,
     },
   },
-});
+})
 
 export default customTheme

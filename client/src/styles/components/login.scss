@@ -1,0 +1,58 @@
+.login-register {
+  background-color: #313131;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-img-container {
+  // width: 300px;
+  height: 500px;
+  background-color: #282828;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+
+.login-img {
+  margin: 2em;
+  width: 250px;
+}
+
+// .login-image {
+//   // width: 70%;
+//   // height: 70%;
+//   // background-image: url('../../assets/images/login-img.png');
+//   background-size: contain;
+//   background-repeat: no-repeat;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// }
+
+.login-form-container {
+  width: 330px;
+  color: white;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+@media (min-width: 860px) {
+  .login-img-container{
+    display: block;
+  }
+  .login-form-container{
+    width: 500px;
+  }
+}

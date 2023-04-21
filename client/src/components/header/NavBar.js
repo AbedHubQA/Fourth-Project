@@ -14,10 +14,14 @@ import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import { removeToken } from '../../helpers/auth'
 import { authenticatedUser } from '../../helpers/auth'
+import UserContext from '../../UserContext'
+import { useContext } from 'react'
 
 function ResponsiveAppBar() {
 
   const navigate = useNavigate()
+
+  const { user } = useContext(UserContext)
 
   const [anchorEl, setAnchorEl] = useState(null)
 
@@ -38,44 +42,44 @@ function ResponsiveAppBar() {
     setAnchorEl(null)
   }
 
-  const username = 'Ali Abed-Ali11111111111'
+  const username = user ? user.username : ''
   const location = useLocation()
 
-  const isChallengesActive = location.pathname === '/challenges';
-  const isLeaderboardActive = location.pathname === '/leaderboard';
+  const isChallengesActive = location.pathname === '/challenges'
+  const isLeaderboardActive = location.pathname === '/leaderboard'
 
   function stringToColor(string) {
-    let hash = 0;
-    let i;
+    let hash = 0
+    let i
 
     for (i = 0; i < string.length; i += 1) {
-      hash = string.charCodeAt(i) + ((hash << 5) - hash);
+      hash = string.charCodeAt(i) + ((hash << 5) - hash)
     }
 
-    let color = '#';
+    let color = '#'
 
     for (i = 0; i < 3; i += 1) {
-      const value = (hash >> (i * 8)) & 0xff;
-      color += `00${value.toString(16)}`.slice(-2);
+      const value = (hash >> (i * 8)) & 0xff
+      color += `00${value.toString(16)}`.slice(-2)
     }
 
-    return color;
+    return color
   }
 
   function stringAvatar(name) {
-    const names = name.split(' ');
-    let children = '';
+    const names = name.split(' ')
+    let children = ''
     if (names.length === 1) {
-      children = `${name[0]}`;
+      children = `${name[0]}`
     } else {
-      children = `${names[0][0]}${names[1][0]}`;
+      children = `${names[0][0]}${names[1][0]}`
     }
     return {
       sx: {
         bgcolor: stringToColor(name),
       },
       children,
-    };
+    }
   }
 
   return (
@@ -186,7 +190,7 @@ function ResponsiveAppBar() {
         </Menu>
       </Toolbar>
     </AppBar>
-  );
+  )
 }
 
-export default ResponsiveAppBar;
+export default ResponsiveAppBar

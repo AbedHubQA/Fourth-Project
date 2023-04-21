@@ -1,6 +1,16 @@
+import HeaderBanner from '../header/Header'
+import ChallengeGrid from '../challenge/ChallengeGrid'
+import ChallengesBanner from '../header/ChallengeBanner'
+
+const headerText = 'The Challenges'
+
 const ChallengesPage = () => {
   return (
-    <h1>Hello World ChallengesPage!</h1>
+    <>
+      <HeaderBanner headerText={headerText} />
+      {/* <ChallengesBanner /> */}
+      <ChallengeGrid />
+    </>
   )
 }
 

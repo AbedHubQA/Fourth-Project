@@ -1,6 +1,19 @@
+import HeaderBanner from '../header/Header'
+import ChallengesBanner from '../header/ChallengeBanner'
+import Leaderboard from '../leaderboard/Leaderboard'
+
 const LeaderboardPage = () => {
+
+  const headerText = 'Leaderboard'
+
   return (
-    <h1>Hello World LeaderboardPage!</h1>
+    <>
+      <HeaderBanner headerText={headerText} />
+      <ChallengesBanner />
+      <main className='challenges-leaderboard'>
+        <Leaderboard />
+      </main>
+    </>
   )
 }
 

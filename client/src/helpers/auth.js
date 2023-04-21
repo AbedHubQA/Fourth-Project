@@ -20,6 +20,15 @@ export const authenticatedUser = () => {
   return false
 }
 
+export const userTokenFunction = () => {
+  const token = localStorage.getItem(tokenName)
+  if (!token) return
+  const userToken = {
+    headers: { Authorization: `Bearer ${token}` },
+  }
+  return userToken
+}
+
 export const removeToken = () => {
   localStorage.removeItem(tokenName)
 }

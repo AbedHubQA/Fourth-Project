@@ -9,17 +9,25 @@ import Login from './components/auth/Login'
 import Register from './components/auth/Register'
 import { ThemeProvider } from '@mui/material/styles'
 import customTheme from './theme/theme'
+import RequireAuth from './components/auth/RequireAuth'
 
 const App = () => {
+
   return (
     <ThemeProvider theme={customTheme}>
       <BrowserRouter>
         <NavBar />
         <Routes>
           <Route path='/' element={<HomePage />} />
-          <Route path='/challenges' element={<ChallengesPage />} />
-          <Route path='/challenges/:challengeId' element={<ChallengeIndivPage />} />
-          <Route path='/leaderboard' element={<LeaderboardPage />} />
+          <Route path='/challenges' element={<RequireAuth redirectTo='/login' />}>
+            <Route index element={<ChallengesPage />} />
+          </Route>
+          <Route path='/challenge/:difficulty/:theme' element={<RequireAuth redirectTo='/login' />}>
+            <Route index element={<ChallengeIndivPage />} />
+          </Route>
+          <Route path='/leaderboard' element={<RequireAuth redirectTo='/login' />}>
+            <Route index element={<LeaderboardPage />} />
+          </Route>
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
           <Route path='*' element={<PageNotFound />} />
