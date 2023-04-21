@@ -10,6 +10,7 @@ class GetChallengeSerializer(serializers.Serializer):
     game_id = serializers.IntegerField()
     difficulty_id = serializers.IntegerField()
     theme_id = serializers.IntegerField()
+    seed = serializers.IntegerField()
 
 class SubmitChallengeSerializer(serializers.Serializer):
     game_id = serializers.IntegerField()

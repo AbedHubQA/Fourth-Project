@@ -49,9 +49,12 @@ class GetChallengeView(APIView):
         game_id = get_challenge_serializer.validated_data['game_id']
         difficulty_id = get_challenge_serializer.validated_data['difficulty_id']
         theme_id = get_challenge_serializer.validated_data['theme_id']
+        seed = get_challenge_serializer.validated_data['seed']
 
         challenges = Challenge.objects.filter(
             difficulty=difficulty_id, theme=theme_id)
+        
+        random.seed(seed)
 
         challenge = random.choice(challenges)
         challenge_serializer = ChallengeSerializer(challenge)
