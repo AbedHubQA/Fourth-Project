@@ -42,7 +42,6 @@ class GetChallengeView(APIView):
     permission_classes = (IsAuthenticatedOrReadOnly,)
     @exceptions
     def post(self, request):
-        
         get_challenge_serializer = GetChallengeSerializer(data=request.data)
         get_challenge_serializer.is_valid(raise_exception=True)
 
@@ -53,15 +52,19 @@ class GetChallengeView(APIView):
 
         challenges = Challenge.objects.filter(
             difficulty=difficulty_id, theme=theme_id)
-        
+
         random.seed(seed)
 
         challenge = random.choice(challenges)
         challenge_serializer = ChallengeSerializer(challenge)
 
+        user_challenge = User_Challenge.objects.filter(game_id=game_id, challenge_id=challenge.id).first()
+        is_completed = user_challenge.is_completed if user_challenge else False
+
         response_data = {
             'game_id': game_id,
             **challenge_serializer.data,
+            'is_completed': is_completed
         }
 
         return Response(response_data)
@@ -71,10 +74,10 @@ class SubmitChallengeView(APIView):
     permission_classes = (IsAuthenticatedOrReadOnly,)
     @exceptions
     def post(self, request):
-        
-        submit_challenge_serializer = SubmitChallengeSerializer(data=request.data)
-        submit_challenge_serializer.is_valid(raise_exception=True)
 
+        submit_challenge_serializer = SubmitChallengeSerializer(
+            data=request.data)
+        submit_challenge_serializer.is_valid(raise_exception=True)
 
         game_id = request.data["game_id"]
         challenge_id = request.data["challenge_id"]
@@ -96,7 +99,8 @@ class SubmitChallengeView(APIView):
 
         user_challenge, created = User_Challenge.objects.get_or_create(
             game_id=game_id, challenge_id=challenge_id,
-            defaults={'points_scored': points_scored, 'is_completed': is_completed}
+            defaults={'points_scored': points_scored,
+                      'is_completed': is_completed}
         )
 
         if not created:

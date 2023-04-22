@@ -11,7 +11,7 @@ const Login = () => {
 
   const headerText = 'Login'
 
-  const { setUser, setIsAuthenticated } = useContext(UserContext)
+  const { setUser } = useContext(UserContext)
 
   const navigate = useNavigate()
 
@@ -33,7 +33,6 @@ const Login = () => {
       localStorage.setItem('Fourth-Project', data.token)
       const userProfile = await axios.get('/api/auth/profile/', userTokenFunction())
       setUser(userProfile.data)
-      setIsAuthenticated(true)
       navigate('/challenges')
     } catch (error) {
       console.log('ERROR', error.response.data.detail)

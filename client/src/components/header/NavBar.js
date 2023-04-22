@@ -21,7 +21,7 @@ function ResponsiveAppBar() {
 
   const navigate = useNavigate()
 
-  const { user } = useContext(UserContext)
+  const { user, logout } = useContext(UserContext)
 
   const [anchorEl, setAnchorEl] = useState(null)
 
@@ -34,12 +34,8 @@ function ResponsiveAppBar() {
   }
 
   const handleLogout = () => {
-    removeToken()
-    const logoutEvent = new CustomEvent('userLoggedOut')
-    window.dispatchEvent(logoutEvent)
+    logout()
     navigate('/')
-    console.log('User logged out')
-    setAnchorEl(null)
   }
 
   const username = user ? user.username : ''

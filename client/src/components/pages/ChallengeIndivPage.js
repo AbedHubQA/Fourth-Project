@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { userTokenFunction } from '../../helpers/auth'
 import GameContext from '../../GameContext'
+import GameBoard from '../game/GameBoard'
 
 const difficulties = {
   bronze: 1,
@@ -61,7 +62,14 @@ const ChallengeIndivPage = () => {
     <>
       {error && <h1>{error}</h1>}
       {challenge && (
-        <h1>Hi</h1>
+        <>
+          <h1>Challenge</h1>
+          <GameBoard
+            imageURL={challenge.image_url}
+            gridSize={challenge.grid_size}
+            onSquareClick={(index) => console.log('Clicked square:', index)}
+          />
+        </>
       )}
     </>
   )

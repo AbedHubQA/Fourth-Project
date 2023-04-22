@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import UserContext from './UserContext'
 import axios from 'axios'
-import { authenticatedUser, userTokenFunction } from './helpers/auth'
+import { authenticatedUser, userTokenFunction, removeToken } from './helpers/auth'
 
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null)
-  const [isAuthenticated, setIsAuthenticated] = useState(authenticatedUser())
 
 
   useEffect(() => {
@@ -21,10 +20,16 @@ const UserProvider = ({ children }) => {
       }
     }
     fetchUserProfile()
-  }, [isAuthenticated])
+  }, [])
+
+  const logout = () => {
+    removeToken()
+    setUser(null)
+    console.log('User logged out')
+  }
 
   return (
-    <UserContext.Provider value={{ user, setUser, isAuthenticated, setIsAuthenticated }}>
+    <UserContext.Provider value={{ user, setUser, isAuthenticated: authenticatedUser, logout }}>
       {children}
     </UserContext.Provider>
   )
