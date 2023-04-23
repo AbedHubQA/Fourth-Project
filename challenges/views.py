@@ -59,7 +59,8 @@ class GetChallengeView(APIView):
         challenge = random.choice(challenges)
         challenge_serializer = ChallengeSerializer(challenge)
 
-        user_challenge = User_Challenge.objects.filter(game_id=game_id, challenge_id=challenge.id).first()
+        user_challenge = User_Challenge.objects.filter(
+            game_id=game_id, challenge_id=challenge.id).first()
         is_completed = user_challenge.is_completed if user_challenge else False
 
         response_data = {
@@ -73,6 +74,7 @@ class GetChallengeView(APIView):
 
 class SubmitChallengeView(APIView):
     permission_classes = (IsAuthenticatedOrReadOnly,)
+
     @exceptions
     def post(self, request):
 
@@ -120,4 +122,3 @@ class SubmitChallengeView(APIView):
         }
 
         return Response(response_data)
-

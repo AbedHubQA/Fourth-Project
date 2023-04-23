@@ -60,6 +60,39 @@
 }
 
 
+.challenge-button::before {
+  content: "";
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  background-image: url('../../assets/images/bronze-play.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-left: 10px;
+}
+
+.challenge-button:hover {
+  background-color: lighten($color: #EB8C00, $amount: 10%);
+}
+
+.challenge-button::after {
+  content: "";
+  position: absolute;
+  left: 55px;
+  top: 50%;
+  width: 70px;
+  height: 0px;
+  border: 1px solid #C28A00;
+  transform: rotate(90deg);
+}
+
+span {
+  font-family: $primary-font;
+}
+
+
+
 .silver-container {
   .challenge-button {
     display: flex;
@@ -256,5 +289,25 @@
     font-size: 28px;
     line-height: 33px;
     padding: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section-buttons {
+    flex-wrap: wrap;
+  }
+
+  .title-challenge {
+    h2 {
+      padding: 20px;
+    }
+  }
+
+  .overall-container {
+    margin: 0 20px;
+  }
+
+  .challenge-button {
+    max-width: 300px;
   }
 }

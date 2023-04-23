@@ -22,7 +22,6 @@ const ChallengeIndivPage = () => {
 
   const { seed, game, setCurrentChallenge, userPoints, setUserPoints } = useContext(GameContext)
 
-
   const [error, setError] = useState('')
   const [challenge, setChallenge] = useState()
   const [challengeState, setChallengeState] = useState(new Set())
@@ -68,9 +67,6 @@ const ChallengeIndivPage = () => {
     }
   }
 
-
-
-
   const { difficulty, theme } = useParams()
 
   useEffect(() => {
@@ -101,7 +97,6 @@ const ChallengeIndivPage = () => {
       )
       setChallenge(data)
       setCurrentChallenge(data)
-      const challengeKey = `${difficulty}_${theme}`
     } catch (error) {
       setError(error.response.data.detail)
     }

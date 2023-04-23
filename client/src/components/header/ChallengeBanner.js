@@ -4,7 +4,7 @@ import UserContext from '../../UserContext'
 import axios from 'axios'
 
 const ChallengeBanner = () => {
-  const { game, createGame, countdown, setCountdown, gameInProgress, setGameInProgress, challengesCompleted, setChallengesCompleted, userPoints, setUserPoints, userRank, setUserRank, gameDataFetched, fetchUserRankAndPoints, userCountdowns, setUserCountdowns } = useContext(GameContext)
+  const { game, createGame, countdown, setCountdown, gameInProgress, setGameInProgress, challengesCompleted, setChallengesCompleted, userPoints, setUserPoints, userRank, setUserRank, gameDataFetched, fetchUserRankAndPoints, userCountdowns, setUserCountdowns, sectionsStatus } = useContext(GameContext)
   const { user } = useContext(UserContext)
 
   const startNewGame = async () => {
@@ -13,6 +13,9 @@ const ChallengeBanner = () => {
     setChallengesCompleted(0)
     setCountdown(120)
   }
+
+  const total_completed = sectionsStatus.length > 0 ? sectionsStatus.reduce((acc, cur) => acc += cur.themes.filter((t) => t.is_completed).length, 0) : 0
+
 
   useEffect(() => {
     if (gameDataFetched) {
@@ -35,7 +38,6 @@ const ChallengeBanner = () => {
     }
     return `${number}th`
   }
-
 
   useEffect(() => {
     let intervalId
@@ -98,11 +100,11 @@ const ChallengeBanner = () => {
             <div
               className="progress-bar"
               style={{
-                width: `${(5 / 12) * 100}%`,
+                width: `${(total_completed / 12) * 100}%`,
               }}
             ></div>
             <div className="progress-text">
-              {gameDataFetched ? `${challengesCompleted}/12` : '-'}
+              {gameDataFetched ? `${total_completed}/12` : '-'}
             </div>
           </div>
         </div>

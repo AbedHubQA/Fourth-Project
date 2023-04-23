@@ -18,6 +18,32 @@ const GameProvider = ({ children }) => {
   const [userRank, setUserRank] = useState(0)
   const [gameInProgress, setGameInProgress] = useState(false)
   const [currentChallenge, setCurrentChallenge] = useState(null)
+  const [sections, setSections] = useState([])
+  const [sectionsStatus, setSectionsStatus] = useState([])
+
+
+  useEffect(() => {
+    const getSections = async () => {
+      try {
+        const { data } = await axios.get('/api/challenges/sections/')
+        setSections(data)
+      } catch (error) {
+        setError(error.response.data.detail)
+      }
+    }
+    const getSectionsStatus = async () => {
+      try {
+        const userToken = userTokenFunction()
+        const { data } = await axios.get('/api/games/active-challenges/', userToken)
+        setSectionsStatus(data)
+      } catch (error) {
+        setError(error.response.data.detail)
+      }
+    }
+    getSections()
+    getSectionsStatus()
+  }, [game, userPoints])
+
 
 
   useEffect(() => {
@@ -148,7 +174,7 @@ const GameProvider = ({ children }) => {
   }
 
   return (
-    <GameContext.Provider value={{ seed, game, createGame, error, countdown, setCountdown, gameInProgress, setGameInProgress, challengesCompleted, setChallengesCompleted, userPoints, setUserPoints, userRank, setUserRank, fetchUserRankAndPoints, gameDataFetched, currentChallenge, setCurrentChallenge }}>
+    <GameContext.Provider value={{ seed, game, createGame, error, countdown, setCountdown, gameInProgress, setGameInProgress, challengesCompleted, setChallengesCompleted, userPoints, setUserPoints, userRank, setUserRank, fetchUserRankAndPoints, gameDataFetched, currentChallenge, setCurrentChallenge, sections, sectionsStatus }}>
       {children}
     </GameContext.Provider>
   )
