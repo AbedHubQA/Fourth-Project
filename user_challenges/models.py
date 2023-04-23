@@ -14,8 +14,8 @@ class User_Challenge(models.Model):
     )
     points_scored = models.IntegerField(default=0)
     is_completed = models.BooleanField(default=False)
-    # revealed_squares = models.CharField(max_length=255, default="")
-    # total_available_points = models.IntegerField(default=1200)
+    revealed_squares = models.CharField(max_length=255, default="")
+    total_available_points = models.IntegerField(default=1200)
 
     class Meta:
         unique_together = ('game', 'challenge')

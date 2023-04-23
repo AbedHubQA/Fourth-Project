@@ -20,7 +20,7 @@ const themes = {
 
 const ChallengeIndivPage = () => {
 
-  const { seed, game, setCurrentChallenge, userPoints, setUserPoints } = useContext(GameContext)
+  const { seed, game, setCurrentChallenge, userPoints, setUserPoints, sectionsStatus, setTotalCompleted, totalCompleted } = useContext(GameContext)
 
   const [error, setError] = useState('')
   const [challenge, setChallenge] = useState()
@@ -28,6 +28,8 @@ const ChallengeIndivPage = () => {
   const [userAnswer, setUserAnswer] = useState('')
   const [successMessage, setSuccessMessage] = useState('')
   const [totalScore, setTotalScore] = useState(1200)
+  const [revealedSquares, setRevealedSquares] = useState(new Set())
+
 
   const gridSize = 25
 
@@ -56,6 +58,8 @@ const ChallengeIndivPage = () => {
       )
 
       if (data.is_correct) {
+        console.log(totalCompleted + 1)
+        setTotalCompleted(totalCompleted + 1)
         setSuccessMessage('Congratulations! Your answer is correct.')
         setUserPoints(userPoints + data.points_scored)
       } else {
@@ -79,8 +83,26 @@ const ChallengeIndivPage = () => {
     }
   }, [])
 
+  const getUserChallenge = async (userChallengeId) => {
+    try {
+      const userToken = userTokenFunction()
+      const { data } = await axios.get(
+        `/api/user_challenges/${userChallengeId}/`,
+        userToken
+      )
+      setRevealedSquares(
+        data.revealed_squares
+          ? new Set(data.revealed_squares.split(',').map(Number))
+          : new Set()
+      )
+      setTotalScore(data.total_available_points)
+    } catch (error) {
+      setError(error.response.data.detail)
+    }
+  }
+
   const getChallenge = async () => {
-    if (!game) {
+    if (!game) {  
       return
     }
     try {
@@ -97,6 +119,8 @@ const ChallengeIndivPage = () => {
       )
       setChallenge(data)
       setCurrentChallenge(data)
+      getUserChallenge(data.user_challenge_id)
+      console.log(data)
     } catch (error) {
       setError(error.response.data.detail)
     }
@@ -120,13 +144,14 @@ const ChallengeIndivPage = () => {
             totalScore={totalScore}
             setTotalScore={setTotalScore}
             challengeState={challengeState}
+            revealedSquares={revealedSquares}
+            setRevealedSquares={setRevealedSquares}
             setChallengeState={setChallengeState}
             imageURL={challenge.image_url}
             gridSize={gridSize}
             onSquareClick={(index) => console.log('Clicked square:', index)}
           />
           <input type="text" value={userAnswer} onChange={handleInputChange} placeholder="Enter your answer" />
-          {console.log('CHALLENGE', challenge)}
           <button onClick={handleSubmit}>Submit</button>
           <button onClick={backToChallenges}>Back</button>
         </>

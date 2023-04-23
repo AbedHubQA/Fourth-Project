@@ -20,6 +20,7 @@ const GameProvider = ({ children }) => {
   const [currentChallenge, setCurrentChallenge] = useState(null)
   const [sections, setSections] = useState([])
   const [sectionsStatus, setSectionsStatus] = useState([])
+  const [totalCompleted, setTotalCompleted] = useState(0)
 
 
   useEffect(() => {
@@ -158,7 +159,7 @@ const GameProvider = ({ children }) => {
       }
     }
   }, [game, countdown, user])
-  
+
 
   const createGame = async () => {
     try {
@@ -168,13 +169,14 @@ const GameProvider = ({ children }) => {
       setGame(data)
       setGameDataFetched(false)
       fetchUserRankAndPoints()
+      setTotalCompleted(0)
     } catch (error) {
       setError(error.response.data.detail)
     }
   }
 
   return (
-    <GameContext.Provider value={{ seed, game, createGame, error, countdown, setCountdown, gameInProgress, setGameInProgress, challengesCompleted, setChallengesCompleted, userPoints, setUserPoints, userRank, setUserRank, fetchUserRankAndPoints, gameDataFetched, currentChallenge, setCurrentChallenge, sections, sectionsStatus }}>
+    <GameContext.Provider value={{ seed, game, createGame, error, countdown, setCountdown, gameInProgress, setGameInProgress, challengesCompleted, setChallengesCompleted, userPoints, setUserPoints, userRank, setUserRank, fetchUserRankAndPoints, gameDataFetched, currentChallenge, setCurrentChallenge, sections, sectionsStatus, totalCompleted, setTotalCompleted }}>
       {children}
     </GameContext.Provider>
   )

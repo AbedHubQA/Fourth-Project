@@ -49,7 +49,6 @@ const Leaderboard = () => {
     const getLeaderboard = async () => {
       try {
         const { data } = await axios.get('/api/leaderboard/')
-        console.log(data)
         setLeaderboard(data)
       } catch (error) {
         setError(error.response.data.detail)

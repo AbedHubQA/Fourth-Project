@@ -22,5 +22,6 @@ urlpatterns = [
     path('api/auth/', include('users.urls')),
     path('api/challenges/', include('challenges.urls')),
     path('api/games/', include('user_games.urls')),
-    path('api/leaderboard/', include('leaderboards.urls'))
+    path('api/leaderboard/', include('leaderboards.urls')),
+    path('api/user_challenges/', include('user_challenges.urls'))
 ]

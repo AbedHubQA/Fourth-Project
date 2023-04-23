@@ -1,10 +1,8 @@
 import { useContext, useState } from 'react'
+import { userTokenFunction } from '../../helpers/auth'
+import axios from 'axios'
 
-const GameBoard = ({ challenge, challengeState, setChallengeState, imageURL, gridSize, onSquareClick, setTotalScore, totalScore }) => {
-
-
-
-  const [revealedSquares, setRevealedSquares] = useState(new Set())
+const GameBoard = ({ challenge, challengeState, setChallengeState, imageURL, gridSize, onSquareClick, setTotalScore, totalScore, revealedSquares, setRevealedSquares }) => {
 
   const getScoreDeduction = (index) => {
     const outerLayer = new Set([0, 1, 2, 3, 4, 5, 9, 15, 19, 20, 21, 22, 23, 24])
@@ -15,18 +13,31 @@ const GameBoard = ({ challenge, challengeState, setChallengeState, imageURL, gri
     return 100
   }
 
-  const handleSquareClick = (index) => {
+  const handleSquareClick = async (index) => {
     const deduction = getScoreDeduction(index)
     setTotalScore((prevTotalScore) => prevTotalScore - deduction)
-
-    setRevealedSquares((prev) => {
-      const updated = new Set(prev)
-      updated.add(index)
-      return updated
-    })
-
+  
+    const updatedRevealedSquares = new Set(revealedSquares)
+    updatedRevealedSquares.add(index)
+    setRevealedSquares(updatedRevealedSquares)
+    
+    try {
+      const userToken = userTokenFunction()
+      const { data } = await axios.put(
+        `/api/user_challenges/update-revealed-squares/${challenge.user_challenge_id}/`,
+        {
+          revealed_squares: Array.from(updatedRevealedSquares).join(','),
+          total_available_points: totalScore - deduction,
+        },
+        userToken
+      )
+    } catch (error) {
+      console.error('Error updating revealed squares:', error)
+    }
+  
     onSquareClick(index)
   }
+  
 
   const renderSquare = (index) => {
     const isRevealed = revealedSquares.has(index)

@@ -59,14 +59,19 @@ class GetChallengeView(APIView):
         challenge = random.choice(challenges)
         challenge_serializer = ChallengeSerializer(challenge)
 
-        user_challenge = User_Challenge.objects.filter(
-            game_id=game_id, challenge_id=challenge.id).first()
-        is_completed = user_challenge.is_completed if user_challenge else False
+        user_challenge, created = User_Challenge.objects.get_or_create(
+            game_id=game_id, challenge_id=challenge.id,
+            defaults={'points_scored': 0,
+                      'is_completed': False}
+        )
+
+        is_completed = user_challenge.is_completed
 
         response_data = {
             'game_id': game_id,
             **challenge_serializer.data,
-            'is_completed': is_completed
+            'is_completed': is_completed,
+            'user_challenge_id': user_challenge.id,
         }
 
         return Response(response_data)
