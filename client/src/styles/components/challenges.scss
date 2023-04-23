@@ -1,0 +1,32 @@
+.game-board {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 1px;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+}
+
+.square {
+  width: 100%;
+  padding-top: 100%;
+  position: relative;
+  background-color: rgba(0, 0, 0);
+  cursor: pointer;
+}
+
+.square.revealed {
+  background-color: transparent;
+}
+
+.challenge-score {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: black;
+  font-weight: bold;
+}

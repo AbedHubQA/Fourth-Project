@@ -25,7 +25,6 @@ const UserProvider = ({ children }) => {
   const logout = () => {
     removeToken()
     setUser(null)
-    console.log('User logged out')
   }
 
   return (

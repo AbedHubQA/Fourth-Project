@@ -25,7 +25,6 @@ const Register = () => {
       await axios.post('/api/auth/register/', formFields)
       navigate('/login')
     } catch (error) {
-      console.log(error.response.data.detail)
       setError(error.response.data.detail)
     }
   }

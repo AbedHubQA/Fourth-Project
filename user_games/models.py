@@ -5,7 +5,7 @@ import datetime
 class User_Game(models.Model):
     
     def get_default_end_time():
-        return datetime.datetime.now() + datetime.timedelta(minutes=1)
+        return datetime.datetime.now() + datetime.timedelta(minutes=2)
 
     user = models.ForeignKey(
         'users.User',

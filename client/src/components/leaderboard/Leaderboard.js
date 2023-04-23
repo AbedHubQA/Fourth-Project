@@ -49,9 +49,9 @@ const Leaderboard = () => {
     const getLeaderboard = async () => {
       try {
         const { data } = await axios.get('/api/leaderboard/')
+        console.log(data)
         setLeaderboard(data)
       } catch (error) {
-        console.log(error)
         setError(error.response.data.detail)
       }
     }
@@ -60,7 +60,7 @@ const Leaderboard = () => {
 
 
   return (
-    <div className='leaderboardPanel'>
+    <div className='leaderboard-panel'>
       <div className='header'>
         <div className='rank'>Rank</div>
         <div className='avatar-space'></div>
@@ -70,7 +70,7 @@ const Leaderboard = () => {
       {leaderboard.map((entry, index) => {
         const { id, user: { username }, total_points } = entry
         return (
-          <div key={id} className='leaderboardEntry'>
+          <div key={id} className='leaderboard-entry'>
             <div className='rank'>{index + 1}</div>
             <div className='name-avatar'>
               <Avatar className='avatar-leaderboard' {...stringAvatar(username)} />

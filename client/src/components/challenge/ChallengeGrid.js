@@ -12,11 +12,9 @@ const ChallengeGrid = () => {
   useEffect(() => {
     const getSections = async () => {
       try {
-        // const userToken = userTokenFunction()
         const { data } = await axios.get('/api/challenges/sections/')
         setSections(data)
       } catch (error) {
-        console.log(error)
         setError(error.response.data.detail)
       }
     }
@@ -29,20 +27,28 @@ const ChallengeGrid = () => {
       <div className="overall-container">
         {sections.map((section, index) => (
           <div key={index} className={`${section.difficulty.toLowerCase()}-container`}>
-            <h2>{section.difficulty}</h2>
-            {section.themes.map((theme, index) => (
-              <Link
-                key={index}
-                to={`/challenge/${section.difficulty.toLowerCase()}/${theme.name.toLowerCase()}`}
-              >
-                <button>{theme.name}</button>
-              </Link>
-            ))}
+            <div className="title-challenge">
+              <h2>{section.difficulty} Challenges</h2>
+            </div>
+            <div className="section-buttons">
+              {section.themes.map((theme, index) => (
+
+                <Link
+                  key={index}
+                  to={`/challenge/${section.difficulty.toLowerCase()}/${theme.name.toLowerCase()}`}
+                >
+                  <button className="challenge-button">
+                    <span>{theme.name}</span>
+                  </button>
+                </Link>
+
+              ))}
+            </div>
           </div>
         ))}
       </div>
     </main>
-  )  
+  )
 }
 
 export default ChallengeGrid

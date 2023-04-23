@@ -35,7 +35,6 @@ const Login = () => {
       setUser(userProfile.data)
       navigate('/challenges')
     } catch (error) {
-      console.log('ERROR', error.response.data.detail)
       setError(error.response.data.detail)
     }
   }

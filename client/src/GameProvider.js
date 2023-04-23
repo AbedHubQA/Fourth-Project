@@ -12,18 +12,13 @@ const GameProvider = ({ children }) => {
   const [gameDataFetched, setGameDataFetched] = useState(false)
   const [game, setGame] = useState()
   const [error, setError] = useState('')
-  const [gameManager, setGameManager] = useState(null)
-  const [countdown, setCountdown] = useState(0)
+  const [countdown, setCountdown] = useState(null)
   const [challengesCompleted, setChallengesCompleted] = useState(0)
   const [userPoints, setUserPoints] = useState(0)
   const [userRank, setUserRank] = useState(0)
   const [gameInProgress, setGameInProgress] = useState(false)
+  const [currentChallenge, setCurrentChallenge] = useState(null)
 
-  useEffect(() => {
-    if (gameManager) {
-      setChallengesCompleted(gameManager.challengesCompleted)
-    }
-  }, [gameManager])
 
   useEffect(() => {
     if (game && challengesCompleted === 12) {
@@ -31,7 +26,7 @@ const GameProvider = ({ children }) => {
       updateUserGameStatus(true)
     }
   }, [game, challengesCompleted])
-  
+
   const fetchUserRankAndPoints = async () => {
     if (!game) {
       return
@@ -59,40 +54,44 @@ const GameProvider = ({ children }) => {
       fetchUserRankAndPoints()
     }
   }, [game, user, gameDataFetched, challengesCompleted, userPoints, userRank])
-  
+
 
   useEffect(() => {
     if (user) {
-      console.log('HELLO')
       setGame(null)
       setGameDataFetched(false)
       setChallengesCompleted(0)
       setUserPoints(0)
       setUserRank(0)
-      setCountdown(0)
+      setCountdown(null)
       setGameInProgress(false)
       fetchActiveGame()
     }
-  }, [user])
+  }, [user, isAuthenticated])
 
-  const updateUserGameStatus = async (isCompleted) => {
+  const updateUserGameStatus = async (isCompleted, gameData = null) => {
     try {
+      if (!isAuthenticated) {
+        return
+      }
       const userToken = userTokenFunction()
+      const gameId = gameData ? gameData.id : game.id
       await axios.put(
-        `/api/games/${game.id}/`,
+        `/api/games/${gameId}/`,
         { is_completed: isCompleted },
         userToken
       )
+      setGame(null)
     } catch (error) {
       console.error('Error updating User_Game status', error)
     }
   }
 
+
   const fetchActiveGame = async () => {
     try {
       const userToken = userTokenFunction()
       const { data } = await axios.get('/api/games/active/', userToken)
-  
       if (data.message && data.message === 'No active game') {
         setGame(null)
         setGameInProgress(false)
@@ -100,14 +99,16 @@ const GameProvider = ({ children }) => {
         const endTime = new Date(data.end_time)
         const currentTime = new Date()
         const remainingTime = Math.floor((endTime - currentTime) / 1000)
-  
+
         if (remainingTime > 0) {
           setGame(data)
           setCountdown(remainingTime)
           setGameInProgress(true)
         } else {
-          if (game) { 
+          if (game) {
             updateUserGameStatus(true)
+          } else {
+            updateUserGameStatus(true, data)
           }
           setGame(null)
           setGameInProgress(false)
@@ -119,23 +120,23 @@ const GameProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    console.log('SECOND HELLO')
     if (user && game && countdown > 0) {
       const timer = setTimeout(() => {
         setCountdown(countdown - 1)
       }, 1000)
       return () => clearTimeout(timer)
-    } else if (game && countdown === 0) {
+    } else if (user && game && countdown === 0) {
       if (isAuthenticated) {
         setGameInProgress(false)
         updateUserGameStatus(true)
       }
     }
-  }, [game, countdown, user, isAuthenticated])
+  }, [game, countdown, user])
+  
 
   const createGame = async () => {
     try {
-      setSeed(Math.random() * 100000)
+      setSeed(Math.floor(Math.random() * 100000))
       const userToken = userTokenFunction()
       const { data } = await axios.post('/api/games/', {}, userToken)
       setGame(data)
@@ -146,12 +147,8 @@ const GameProvider = ({ children }) => {
     }
   }
 
-  const updateGameManager = (newGameManager) => {
-    setGameManager(newGameManager)
-  }
-
   return (
-    <GameContext.Provider value={{ seed, game, createGame, error, gameManager, updateGameManager, countdown, setCountdown, gameInProgress, setGameInProgress, challengesCompleted, setChallengesCompleted, userPoints, setUserPoints, userRank, setUserRank, fetchUserRankAndPoints, gameDataFetched }}>
+    <GameContext.Provider value={{ seed, game, createGame, error, countdown, setCountdown, gameInProgress, setGameInProgress, challengesCompleted, setChallengesCompleted, userPoints, setUserPoints, userRank, setUserRank, fetchUserRankAndPoints, gameDataFetched, currentChallenge, setCurrentChallenge }}>
       {children}
     </GameContext.Provider>
   )

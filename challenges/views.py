@@ -42,6 +42,7 @@ class GetChallengeView(APIView):
     permission_classes = (IsAuthenticatedOrReadOnly,)
     @exceptions
     def post(self, request):
+        print(request)
         get_challenge_serializer = GetChallengeSerializer(data=request.data)
         get_challenge_serializer.is_valid(raise_exception=True)
 
@@ -91,26 +92,22 @@ class SubmitChallengeView(APIView):
         is_correct = user_answer.lower() == challenge.solution.lower()
 
         if is_correct:
-            points_scored = points_scored
-            is_completed = True
+            user_game.total_score += points_scored
         else:
             points_scored = 0
-            is_completed = False
+
+        user_game.save()
 
         user_challenge, created = User_Challenge.objects.get_or_create(
             game_id=game_id, challenge_id=challenge_id,
             defaults={'points_scored': points_scored,
-                      'is_completed': is_completed}
+                      'is_completed': is_correct}
         )
 
         if not created:
             user_challenge.points_scored = points_scored
-            user_challenge.is_completed = is_completed
+            user_challenge.is_completed = is_correct
             user_challenge.save()
-
-        user_game.total_score += points_scored
-        user_game.is_completed = request.data.get('is_last_challenge', False)
-        user_game.save()
 
         leaderboard_entry.total_points = user_game.total_score
         leaderboard_entry.save()
@@ -123,3 +120,4 @@ class SubmitChallengeView(APIView):
         }
 
         return Response(response_data)
+

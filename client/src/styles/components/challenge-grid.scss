@@ -9,3 +9,252 @@
   align-items: center;
 }
 
+.bronze-container {
+
+  .challenge-button {
+    display: flex;
+    align-items: center;
+    position: relative;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    width: 380px;
+    height: 100px;
+    background: #EB8C00;
+    border-left: 5px solid #AE6800;
+    border-radius: 5px;
+    margin: 20px;
+    cursor: pointer;
+  }
+
+  .challenge-button::before {
+    content: "";
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    background-image: url('../../assets/images/bronze-play.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-left: 10px;
+  }
+
+  .challenge-button:hover {
+    background-color: lighten($color: #EB8C00, $amount: 10%);
+  }
+
+  .challenge-button::after {
+    content: "";
+    position: absolute;
+    left: 55px;
+    top: 50%;
+    width: 70px;
+    height: 0px;
+    border: 1px solid #C28A00;
+    transform: rotate(90deg);
+  }
+
+  span {
+    font-family: $primary-font;
+  }
+}
+
+
+.silver-container {
+  .challenge-button {
+    display: flex;
+    align-items: center;
+    position: relative;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    width: 380px;
+    height: 100px;
+    background: #5C5C5C;
+    border-left: 5px solid #DEDEDE;
+    border-radius: 5px;
+    margin: 20px;
+    cursor: pointer;
+  }
+
+  .challenge-button::before {
+    content: "";
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    background-image: url('../../assets/images/silver-play.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-left: 10px;
+  }
+
+  .challenge-button:hover {
+    background-color: lighten($color: #5C5C5C, $amount: 10%);
+  }
+
+  .challenge-button::after {
+    content: "";
+    position: absolute;
+    left: 55px;
+    top: 50%;
+    width: 70px;
+    height: 0px;
+    border: 1px solid #DEDEDEDE;
+    transform: rotate(90deg);
+  }
+
+  span {
+    color: white;
+    font-family: $primary-font;
+  }
+
+}
+
+.gold-container {
+  .challenge-button {
+    display: flex;
+    align-items: center;
+    position: relative;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    width: 380px;
+    height: 100px;
+    background: #FFB600;
+    border-left: 5px solid #C28A00;
+    border-radius: 5px;
+    margin: 20px;
+    cursor: pointer;
+  }
+
+  .challenge-button::before {
+    content: "";
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    background-image: url('../../assets/images/gold-play.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-left: 10px;
+  }
+
+  .challenge-button:hover {
+    background-color: lighten($color: #FFB600, $amount: 10%);
+  }
+
+  .challenge-button::after {
+    content: "";
+    position: absolute;
+    left: 55px;
+    top: 50%;
+    width: 70px;
+    height: 0px;
+    border: 1px solid #C28A00;
+    transform: rotate(90deg);
+  }
+
+  span {
+    color: black;
+    font-family: $primary-font;
+  }
+
+}
+
+.platinum-container {
+  .challenge-button {
+    display: flex;
+    align-items: center;
+    position: relative;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    width: 380px;
+    height: 100px;
+    background: #7D7D7D;
+    border-left: 5px solid #FFFFFF;
+    border-radius: 5px;
+    margin: 20px;
+    cursor: pointer;
+  }
+
+  .challenge-button::before {
+    content: "";
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    background-image: url('../../assets/images/platinum-play.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-left: 10px;
+  }
+
+  .challenge-button:hover {
+    background-color: lighten($color: #7D7D7D, $amount: 10%);
+  }
+
+  .challenge-button::after {
+    content: "";
+    position: absolute;
+    left: 55px;
+    top: 50%;
+    width: 70px;
+    height: 0px;
+    border: 1px solid #FFFFFF;
+    transform: rotate(90deg);
+  }
+
+  span {
+    color: white;
+    font-family: $primary-font;
+  }
+
+}
+
+.section-buttons {
+  display: flex;
+  padding: 20px;
+
+  a {
+    text-decoration: none;
+  }
+
+  span {
+    margin-left: 100px;
+  }
+}
+
+
+.bronze-container,
+.silver-container,
+.gold-container,
+.platinum-container {
+  // width: 70%;
+  // height: 70%;
+  margin: 1em auto;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  overflow-y: auto;
+  font-family: $primary-font;
+  display: flex;
+  flex-direction: column;
+
+  .challenge-button {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  h2 {
+    background-color: rgba(0, 0, 0, 60%);
+    color: white;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 33px;
+    padding: 30px;
+  }
+}
