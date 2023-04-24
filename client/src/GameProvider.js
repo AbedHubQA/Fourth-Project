@@ -3,6 +3,7 @@ import axios from 'axios'
 import GameContext from './GameContext'
 import UserContext from './UserContext'
 import { userTokenFunction } from './helpers/auth'
+import { useNavigate } from 'react-router-dom'
 
 const GameProvider = ({ children }) => {
 
@@ -22,7 +23,6 @@ const GameProvider = ({ children }) => {
   const [sectionsStatus, setSectionsStatus] = useState([])
   const [totalCompleted, setTotalCompleted] = useState(0)
 
-
   useEffect(() => {
     const getSections = async () => {
       try {
@@ -33,16 +33,20 @@ const GameProvider = ({ children }) => {
       }
     }
     const getSectionsStatus = async () => {
+      if (!isAuthenticated()) return
       try {
         const userToken = userTokenFunction()
         const { data } = await axios.get('/api/games/active-challenges/', userToken)
         setSectionsStatus(data)
       } catch (error) {
         setError(error.response.data.detail)
+        console.log(error.response.data.detail)
       }
     }
     getSections()
-    getSectionsStatus()
+    if (isAuthenticated()) {
+      getSectionsStatus()
+    }
   }, [game, userPoints])
 
 

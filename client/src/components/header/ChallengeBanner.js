@@ -23,7 +23,7 @@ const ChallengeBanner = () => {
     if (gameDataFetched) {
       fetchUserRankAndPoints()
     }
-  }, [userPoints, totalCompleted])
+  }, [userPoints, totalCompleted, countdown])
 
   const ordinalSuffix = (number) => {
     const lastDigit = number % 10
@@ -53,14 +53,15 @@ const ChallengeBanner = () => {
   }, [countdown])
 
   const getBackgroundColor = () => {
-    if (countdown === null) return 'black'
-    if (countdown <= 10) return 'red'
-    if (countdown <= 60) return 'purple'
-    return 'black'
+    if (countdown === null) return 'white'
+    if (countdown === 0) return 'white'
+    if (countdown <= 10) return 'firebrick'
+    if (countdown <= 30) return 'chocolate'
+    return 'white'
   }
 
   const formatCountdown = (countdown) => {
-    if (countdown === null) {
+    if (countdown === null || countdown === 0) {
       return ['-', '-', '-', '-']
     }
 
@@ -74,46 +75,51 @@ const ChallengeBanner = () => {
 
   return (
     <>
-      <div className="challenge-banner">
-        <div className="current-score">
-          <h3>CURRENT SCORE</h3>
-          <div className="score-box">
-            {gameDataFetched ? `${userPoints}pts |  ${ordinalSuffix(userRank)}` : '-'}
-          </div>
+      <div className="overall-banner">
+        <div className="start-game">
+          <button onClick={startNewGame} disabled={gameInProgress}>
+            START NEW GAME
+          </button>
         </div>
-        <div className="time-remaining">
-          <h3>CHALLENGE TIME REMAINING</h3>
-          <div className="countdown">
-            {formatCountdown(countdown).map((timePart, index) => (
+        <div className="challenge-banner">
+          <div className="current-score">
+            <h3>CURRENT SCORE</h3>
+            <div className="score-box">
+              {gameDataFetched ? `${userPoints}pts |  ${ordinalSuffix(userRank)}` : '-'}
+            </div>
+          </div>
+          <div className="time-remaining">
+            <h3>CHALLENGE TIME REMAINING</h3>
+            <div className="countdown">
+              {formatCountdown(countdown).map((timePart, index) => (
+                <div
+                  key={index}
+                  className="countdown-part"
+                >
+                  <span className="countdown-number" style={{ color: getBackgroundColor() }}>{timePart.split(' ')[0]}</span>
+                  <span className="countdown-unit" style={{ color: getBackgroundColor() }}>{timePart.split(' ')[1]}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="challenges-completed">
+            <h3>CHALLENGES COMPLETED</h3>
+            <div className="progress-bar-container">
               <div
-                key={index}
-                className="countdown-part"
-                style={{ backgroundColor: getBackgroundColor() }}
-              >
-                <span className="countdown-number">{timePart.split(' ')[0]}</span>
-                <span className="countdown-unit">{timePart.split(' ')[1]}</span>
+                className="progress-bar"
+                style={{
+                  width: `${(totalCompleted / 12) * 100}%`,
+                }}
+              ></div>
+              <div className="progress-text">
+                {gameDataFetched ? `${totalCompleted}/12` : '-'}
               </div>
-            ))}
-          </div>
-        </div>
-        <div className="challenges-completed">
-          <h3>CHALLENGES COMPLETED</h3>
-          <div className="progress-bar-container">
-            <div
-              className="progress-bar"
-              style={{
-                width: `${(totalCompleted / 12) * 100}%`,
-              }}
-            ></div>
-            <div className="progress-text">
-              {gameDataFetched ? `${totalCompleted}/12` : '-'}
             </div>
           </div>
         </div>
+
       </div>
-      <button onClick={startNewGame} disabled={gameInProgress}>
-        START NEW GAME
-      </button>
+
     </>
   )
 }

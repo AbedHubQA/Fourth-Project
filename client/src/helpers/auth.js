@@ -20,6 +20,16 @@ export const authenticatedUser = () => {
   return false
 }
 
+export const getAuthenticatedUserId = () => {
+  const payload = getPayload()
+  if (!payload) return null
+  const currentTime = Date.now()
+  if (currentTime < payload.exp * 1000) {
+    return payload.sub
+  }
+  return null
+}
+
 export const userTokenFunction = () => {
   const token = localStorage.getItem(tokenName)
   if (!token) return

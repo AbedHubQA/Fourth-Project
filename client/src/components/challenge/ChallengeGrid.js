@@ -24,7 +24,8 @@ const ChallengeGrid = () => {
                   key={index}
                   to={`/challenge/${section.difficulty.toLowerCase()}/${theme.name.toLowerCase()}`}
                 >
-                  <button className="challenge-button" disabled={sectionsStatus.length > 0 ? sectionsStatus[sectionIndex].themes[index].is_completed : true}>
+                  <button className={`challenge-button ${sectionsStatus.length > 0 ? (sectionsStatus[sectionIndex].themes[index].is_completed ? 'completed' : 'active') : 'locked'}`}
+                    disabled={sectionsStatus.length > 0 ? sectionsStatus[sectionIndex].themes[index].is_completed : true}>
                     <span>
                       {theme.name}
                     </span>

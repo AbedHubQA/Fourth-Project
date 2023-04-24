@@ -137,9 +137,20 @@ span {
     transform: rotate(90deg);
   }
 
-  span {
-    color: white;
+  button {
     font-family: $primary-font;
+  
+    &:not(:disabled) {
+      > span {
+        color: white;
+      }
+    }
+  
+    &:disabled {
+      > span {
+        color: -internal-light-dark(rgba(16, 16, 16, 0.3), rgba(255, 255, 255, 0.3));
+      }
+    }
   }
 
 }
@@ -189,7 +200,7 @@ span {
   }
 
   span {
-    color: black;
+    // color: black;
     font-family: $primary-font;
   }
 
@@ -239,9 +250,20 @@ span {
     transform: rotate(90deg);
   }
 
-  span {
-    color: white;
+  button {
     font-family: $primary-font;
+  
+    &:not(:disabled) {
+      > span {
+        color: white;
+      }
+    }
+  
+    &:disabled {
+      > span {
+        color: -internal-light-dark(rgba(16, 16, 16, 0.3), rgba(255, 255, 255, 0.3));
+      }
+    }
   }
 
 }
@@ -309,5 +331,31 @@ span {
 
   .challenge-button {
     max-width: 300px;
+  }
+}
+
+.challenge-button {
+
+  &::before {
+    content: "";
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-left: 10px;
+  }
+
+  // &.active::before {
+  //   background-image: url('../../assets/images/active-img.png');
+  // }
+
+  &.completed::before {
+    background-image: url('../../assets/images/completed.png');
+  }
+
+  &.locked::before {
+    background-image: url('../../assets/images/locked.png');
   }
 }

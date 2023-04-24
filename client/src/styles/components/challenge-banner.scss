@@ -1,8 +1,48 @@
+.overall-banner {
+  background-color: $primary-orange;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.start-game {
+  button {
+    border: none;
+    outline: none;
+    box-shadow: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-family: 'Helvetica Neue';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    width: 200px;
+    height: 40px;
+    margin-top: 10px;
+    cursor: pointer;
+    text-align: center;
+    letter-spacing: -0.4px;
+    color: #FFFFFF;
+    background-color: #358C00;
+    &:hover {
+      background-color: lighten($color: #358C00, $amount: 10%);
+    }
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      display: none;
+    }
+  }
+}
+
 .challenge-banner {
   display: flex;
   justify-content: space-around;
   align-items: center;
   background-color: $primary-orange;
+  margin-bottom: 8px;
 
   h3 {
     font-size: 12px;

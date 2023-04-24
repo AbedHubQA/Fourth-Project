@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { authenticatedUser } from '../../helpers/auth'
+import { authenticatedUser, getAuthenticatedUserId } from '../../helpers/auth'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { userTokenFunction } from '../../helpers/auth'
@@ -7,6 +7,9 @@ import Avatar from '@mui/material/Avatar'
 
 
 const Leaderboard = () => {
+
+  const authenticatedUserId = getAuthenticatedUserId()
+
 
   function stringToColor(string) {
     let hash = 0
@@ -57,6 +60,16 @@ const Leaderboard = () => {
     getLeaderboard()
   }, [])
 
+  const deleteEntry = async (id) => {
+    try {
+      const userToken = userTokenFunction()
+      await axios.delete(`/api/leaderboard/${id}/`, userToken)
+      setLeaderboard(leaderboard.filter((entry) => entry.id !== id))
+    } catch (error) {
+      console.error('Error deleting entry:', error)
+    }
+  }
+
 
   return (
     <div className='leaderboard-panel'>
@@ -66,8 +79,11 @@ const Leaderboard = () => {
         <div className='name-header'>Name</div>
         <div className='score'>Score</div>
       </div>
+      {console.log(leaderboard)}
       {leaderboard.map((entry, index) => {
-        const { id, user: { username }, total_points } = entry
+        const { id, user: { id: userId, username }, total_points } = entry
+        const isOwner = authenticatedUserId && authenticatedUserId === userId
+
         return (
           <div key={id} className='leaderboard-entry'>
             <div className='rank'>{index + 1}</div>
@@ -78,10 +94,18 @@ const Leaderboard = () => {
               {username}
             </div>
             <div className='score'>{total_points}</div>
+            {isOwner && (
+              <button
+                className='delete-button'
+                onClick={() => deleteEntry(id)}
+              >
+                Delete
+              </button>
+            )}
           </div>
         )
       })}
-    </div >
+    </div>
   )
 }
 

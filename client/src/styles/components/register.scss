@@ -1,0 +1,17 @@
+.register-img {
+  width: 350px;
+  margin: 2em;
+}
+
+.login-email, .login-password {
+  color: white;
+}
+
+.password-confirmation {
+  width: 70%;
+  display: flex;
+  justify-content: space-between;
+  .login-email {
+    width: 48%;
+  }
+}

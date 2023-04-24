@@ -52,15 +52,15 @@ const Login = () => {
             <img className='login-img' src={LoginImage} alt="Testing" />
           </div>
           <div className='login-form-container'>
-
             <h1>Welcome back!</h1>
             <form onSubmit={handleLogin}>
               <input
                 type='email'
                 name='email'
                 value={formFields.email}
-                placeholder='Email'
+                placeholder='Email Address'
                 onChange={handleChange}
+                className='login-email'
               />
               <br />
               <input
@@ -69,12 +69,15 @@ const Login = () => {
                 value={formFields.password}
                 placeholder='Password'
                 onChange={handleChange}
+                className='login-password'
               />
               <br />
               {error && <p>{error}</p>}
-              <button type='submit'>Login</button>
+              <div className="control-buttons">
+                <button className='login-page-back' onClick={handleBack} type='button'>Back</button>
+                <button className='login-page-btn' type='submit'>Login</button>
+              </div>
             </form>
-            <button onClick={handleBack}>Back</button>
           </div >
         </div>
       </main>

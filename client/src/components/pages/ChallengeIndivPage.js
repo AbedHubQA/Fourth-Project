@@ -59,9 +59,10 @@ const ChallengeIndivPage = () => {
 
       if (data.is_correct) {
         console.log(totalCompleted + 1)
-        setTotalCompleted(totalCompleted + 1)
+        // setTotalCompleted(totalCompleted + 1)
         setSuccessMessage('Congratulations! Your answer is correct.')
         setUserPoints(userPoints + data.points_scored)
+        backToChallenges()
       } else {
         setError('Incorrect answer. Please try again.')
       }
@@ -78,9 +79,9 @@ const ChallengeIndivPage = () => {
       setError('Invalid difficulty/theme')
     }
 
-    if (!game) {
-      setError('Game not started')
-    }
+    // if (!game) {
+    //   setError('Game not started')
+    // }
   }, [])
 
   const getUserChallenge = async (userChallengeId) => {
@@ -102,7 +103,7 @@ const ChallengeIndivPage = () => {
   }
 
   const getChallenge = async () => {
-    if (!game) {  
+    if (!game) {
       return
     }
     try {
@@ -134,27 +135,33 @@ const ChallengeIndivPage = () => {
   return (
     <>
       <ChallengeBanner />
-      {error && <h1>{error}</h1>}
-      {successMessage && <h1>{successMessage}</h1>}
       {challenge && (
-        <>
-          <h1>Challenge</h1>
-          <GameBoard
-            challenge={challenge}
-            totalScore={totalScore}
-            setTotalScore={setTotalScore}
-            challengeState={challengeState}
-            revealedSquares={revealedSquares}
-            setRevealedSquares={setRevealedSquares}
-            setChallengeState={setChallengeState}
-            imageURL={challenge.image_url}
-            gridSize={gridSize}
-            onSquareClick={(index) => console.log('Clicked square:', index)}
-          />
-          <input type="text" value={userAnswer} onChange={handleInputChange} placeholder="Enter your answer" />
-          <button onClick={handleSubmit}>Submit</button>
-          <button onClick={backToChallenges}>Back</button>
-        </>
+        <main className='game-main'>
+          <button className='game-back-btn' onClick={backToChallenges}>Exit Challenge</button>
+          <div className="game-panel">
+            <GameBoard
+              challenge={challenge}
+              totalScore={totalScore}
+              setTotalScore={setTotalScore}
+              challengeState={challengeState}
+              revealedSquares={revealedSquares}
+              setRevealedSquares={setRevealedSquares}
+              setChallengeState={setChallengeState}
+              imageURL={challenge.image_url}
+              gridSize={gridSize}
+              difficulty={difficulty}
+              theme={theme}
+              onSquareClick={(index) => console.log('Clicked square:', index)}
+            />
+            <div className="controls-and-error">
+              <div className="game-controls">
+                <input className='solution-input' type="text" value={userAnswer} onChange={handleInputChange} placeholder="Your Answer" />
+                <button className='submit-solution' onClick={handleSubmit}>Submit</button>
+              </div>
+              <h2>{error && error}</h2>
+            </div>
+          </div>
+        </ main>
       )}
     </>
   )
