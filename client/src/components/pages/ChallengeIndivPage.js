@@ -20,7 +20,7 @@ const themes = {
 
 const ChallengeIndivPage = () => {
 
-  const { seed, game, setCurrentChallenge, userPoints, setUserPoints, sectionsStatus, setTotalCompleted, totalCompleted } = useContext(GameContext)
+  const { seed, game, setCurrentChallenge, userPoints, setUserPoints, sectionsStatus, setTotalCompleted, totalCompleted, countdown } = useContext(GameContext)
 
   const [error, setError] = useState('')
   const [challenge, setChallenge] = useState()
@@ -42,6 +42,12 @@ const ChallengeIndivPage = () => {
   const backToChallenges = () => {
     navigate('/challenges')
   }
+
+  useEffect(() => {
+    if (countdown === 0) {
+      navigate('/challenges')
+    }
+  }, [countdown])
 
   const handleSubmit = async () => {
     try {

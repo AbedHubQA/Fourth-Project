@@ -20,7 +20,8 @@ class StartGameView(APIView):
     permission_classes = (IsAuthenticatedOrReadOnly,)
     @exceptions
     def post(self, request):
-        user_game = User_Game(user=request.user)
+        seed = request.data.get('seed', 0)
+        user_game = User_Game(user=request.user, seed=seed)
         user_game.save()
         leaderboard_entry = Leaderboard(user=request.user, game=user_game, total_points=0)
         leaderboard_entry.save()

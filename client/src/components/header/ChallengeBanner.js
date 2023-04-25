@@ -11,7 +11,7 @@ const ChallengeBanner = () => {
     await createGame()
     setGameInProgress(true)
     setChallengesCompleted(0)
-    setCountdown(120)
+    setCountdown(30)
   }
 
 

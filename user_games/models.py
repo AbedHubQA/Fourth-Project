@@ -2,10 +2,12 @@ from django.db import models
 import datetime
 
 # Create your models here.
+
+
 class User_Game(models.Model):
-    
+
     def get_default_end_time():
-        return datetime.datetime.now() + datetime.timedelta(minutes=2)
+        return datetime.datetime.now() + datetime.timedelta(seconds=30)
 
     user = models.ForeignKey(
         'users.User',
@@ -14,6 +16,7 @@ class User_Game(models.Model):
     )
     start_time = models.DateTimeField(auto_now_add=True)
     end_time = models.DateTimeField(default=get_default_end_time)
+    seed = models.IntegerField(default=0)
     total_score = models.IntegerField(default=0)
     is_completed = models.BooleanField(default=False)
 

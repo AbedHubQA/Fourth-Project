@@ -11,6 +11,7 @@ from challenge_difficulties.models import Challenge_Difficulty
 from challenge_themes.models import Challenge_Theme
 from .serializers.common import ChallengeSerializer, GetChallengeSerializer, SubmitChallengeSerializer
 import random
+import hashlib
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 # Create your views here.
@@ -18,6 +19,7 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 class GetChallengeSectionsView(APIView):
     permission_classes = (IsAuthenticatedOrReadOnly,)
+
     @exceptions
     def get(self, request):
         difficulties = Challenge_Difficulty.objects.all()
@@ -40,6 +42,7 @@ class GetChallengeSectionsView(APIView):
 
 class GetChallengeView(APIView):
     permission_classes = (IsAuthenticatedOrReadOnly,)
+
     @exceptions
     def post(self, request):
         print(request)
@@ -49,13 +52,20 @@ class GetChallengeView(APIView):
         game_id = get_challenge_serializer.validated_data['game_id']
         difficulty_id = get_challenge_serializer.validated_data['difficulty_id']
         theme_id = get_challenge_serializer.validated_data['theme_id']
-        seed = get_challenge_serializer.validated_data['seed']
+
+        user_game = User_Game.objects.get(id=game_id)
+        seed = user_game.seed
 
         challenges = Challenge.objects.filter(
             difficulty=difficulty_id, theme=theme_id)
 
-        random.seed(seed)
+        hashed_seed = hashlib.md5(f"{seed}-{difficulty_id}-{theme_id}".encode()).hexdigest()
+        new_seed = int(hashed_seed, 16) % (10 ** 8)
+        random.seed(new_seed)
 
+
+        challenges = list(challenges)
+        random.shuffle(challenges)
         challenge = random.choice(challenges)
         challenge_serializer = ChallengeSerializer(challenge)
 

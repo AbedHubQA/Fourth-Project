@@ -167,9 +167,11 @@ const GameProvider = ({ children }) => {
 
   const createGame = async () => {
     try {
-      setSeed(Math.floor(Math.random() * 100000))
+      const newSeed = Math.floor(Math.random() * 100000)
+      setSeed(newSeed)
+      console.log('SEED', newSeed)
       const userToken = userTokenFunction()
-      const { data } = await axios.post('/api/games/', {}, userToken)
+      const { data } = await axios.post('/api/games/', { seed: newSeed }, userToken)
       setGame(data)
       setGameDataFetched(false)
       fetchUserRankAndPoints()
