@@ -43,6 +43,7 @@
   align-items: center;
   flex: 1;
   text-align: left;
+  font-size: 1.5em;
 }
 
 .name-header {
@@ -64,10 +65,11 @@
   // left: -10px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 920px) {
   .avatar-leaderboard {
     display: flex !important;
   }
+
 
   .name-header {
     display: flex;
@@ -100,7 +102,50 @@
   border-radius: 5px;
   padding: 5px 10px;
   cursor: pointer;
+
   &:hover {
     background-color: lighten($color: #f44336, $amount: 10%);
+  }
+}
+
+@media (max-width: 1100px) {
+  .leaderboard-panel {
+    width: 90%;
+  }
+}
+
+@media (max-width: 900px) {
+  .leaderboard-panel {
+    width: 90%;
+  }
+
+  .rank {
+    display: none;
+  }
+
+  .score,
+  .name-username,
+  .name-header {
+    font-size: 1.5em;
+  }
+
+  @media (max-width: 600px) {
+
+    .leaderboard-entry {
+
+      .score,
+      .name-username {
+        font-size: 0.75em;
+      }
+    }
+    .delete-button {
+      padding: 3px;
+    }
+  }
+
+  .name-header,
+  .name-username {
+    width: 100px;
+    flex: none;
   }
 }

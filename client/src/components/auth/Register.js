@@ -48,6 +48,7 @@ const Register = () => {
             <img className='register-img' src={RegisterImage} alt="Testing" />
           </div>
           <div className="login-form-container">
+            <h1>Register below!</h1>
             <form onSubmit={handleSubmit}>
               <input className='login-email' type='text' name='username' placeholder='Username' onChange={handleChange} value={formFields.username} />
               <br />

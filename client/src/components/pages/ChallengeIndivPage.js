@@ -137,7 +137,9 @@ const ChallengeIndivPage = () => {
       <ChallengeBanner />
       {challenge && (
         <main className='game-main'>
-          <button className='game-back-btn' onClick={backToChallenges}>Exit Challenge</button>
+          <div className="game-back">
+            <button className='game-back-btn' onClick={backToChallenges}>Exit Challenge</button>
+          </div>
           <div className="game-panel">
             <GameBoard
               challenge={challenge}

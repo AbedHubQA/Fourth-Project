@@ -100,6 +100,10 @@
     }
   }
 
+  input {
+    padding: 10px;
+  }
+
   h1 {
     font-family: 'Helvetica Neue';
     font-style: normal;
@@ -115,8 +119,16 @@
   .login-img-container {
     display: flex;
   }
-
   .login-form-container {
     width: 500px;
+  }
+}
+
+@media (max-width: 859px) {
+  .control-buttons {
+    flex-wrap: wrap-reverse;
+  }
+  .login-page-btn {
+    margin-bottom: 10px;
   }
 }

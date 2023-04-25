@@ -41,30 +41,3 @@ const ChallengeGrid = () => {
 }
 
 export default ChallengeGrid
-
-
-// <main className='challenges-leaderboard'>
-//   <div className="overall-container">
-//     {sectionsStatus.length > 0 && sectionsStatus.map((section, index) => (
-//       <div key={index} className={`${section.difficulty.toLowerCase()}-container`}>
-//         <div className="title-challenge">
-//           <h2>{section.difficulty} Challenges</h2>
-//         </div>
-//         <div className="section-buttons">
-//           {section.themes.map((theme, index) => (
-//             <Link
-//               key={index}
-//               to={`/challenge/${section.difficulty.toLowerCase()}/${theme.name.toLowerCase()}`}
-//             >
-//               <button className={`challenge-button ${theme.is_completed ? 'completed' : 'playable'}`} disabled={theme.is_completed}>
-//                 <span style={{ pointerEvents: theme.is_completed ? 'none' : 'auto' }}>
-//                   {theme.name}
-//                 </span>
-//               </button>
-//             </Link>
-//           ))}
-//         </div>
-//       </div>
-//     ))}
-//   </div>
-// </main>

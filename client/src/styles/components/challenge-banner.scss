@@ -153,5 +153,10 @@
 }
 
 @media (max-width: 768px) {
-
+    .challenges-completed, .current-score {
+      display: none;
+    }
+    .time-remaining {
+      width: 80vw;
+    }
 }
