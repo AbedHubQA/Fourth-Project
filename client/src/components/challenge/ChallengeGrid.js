@@ -8,13 +8,23 @@ import GameContext from '../../GameContext'
 
 const ChallengeGrid = () => {
 
-  const { game, sections, sectionsStatus } = useContext(GameContext)
+  const { game, sections, sectionsStatus, getSections, getSectionsStatus } = useContext(GameContext)
+
+  useEffect(() => {
+    getSections()
+    getSectionsStatus()
+  }, [])
+
+  useEffect(() => {
+    getSectionsStatus()
+  }, [game, sections])
+
 
   return (
     <main className='challenges-leaderboard'>
       <div className="overall-container">
         {sections.map((section, sectionIndex) => (
-          <div key={sectionIndex} className={`${section.difficulty.toLowerCase()}-container`}>
+          <div key={sectionIndex} className={`${section.difficulty.toLowerCase()}1-container`}>
             <div className="title-challenge">
               <h2>{section.difficulty} Challenges</h2>
             </div>
@@ -26,9 +36,11 @@ const ChallengeGrid = () => {
                 >
                   <button className={`challenge-button ${sectionsStatus.length > 0 ? (sectionsStatus[sectionIndex].themes[index].is_completed ? 'completed' : 'active') : 'locked'}`}
                     disabled={sectionsStatus.length > 0 ? sectionsStatus[sectionIndex].themes[index].is_completed : true}>
-                    <span>
-                      {theme.name}
-                    </span>
+                    <div className="span-wrapper">
+                      <span>
+                        {theme.name}
+                      </span>
+                    </div>
                   </button>
                 </Link>
               ))}

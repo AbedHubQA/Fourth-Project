@@ -79,7 +79,6 @@ const Leaderboard = () => {
         <div className='name-header'>Name</div>
         <div className='score'>Score</div>
       </div>
-      {console.log(leaderboard)}
       {leaderboard.map((entry, index) => {
         const { id, user: { id: userId, username }, total_points } = entry
         const isOwner = authenticatedUserId && authenticatedUserId === userId

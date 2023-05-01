@@ -3,102 +3,110 @@ import axios from 'axios'
 import GameContext from './GameContext'
 import UserContext from './UserContext'
 import { userTokenFunction } from './helpers/auth'
-import { useNavigate } from 'react-router-dom'
+import GameOutcome from './components/game/GameOutcome'
 
 const GameProvider = ({ children }) => {
 
   const { user, isAuthenticated } = useContext(UserContext)
 
-  const [seed, setSeed] = useState(0)
-  const [gameDataFetched, setGameDataFetched] = useState(false)
-  const [game, setGame] = useState()
   const [error, setError] = useState('')
+  const [game, setGame] = useState()
+  const [gameDataFetched, setGameDataFetched] = useState(false)
   const [countdown, setCountdown] = useState(null)
-  const [challengesCompleted, setChallengesCompleted] = useState(0)
   const [userPoints, setUserPoints] = useState(0)
   const [userRank, setUserRank] = useState(0)
   const [gameInProgress, setGameInProgress] = useState(false)
-  const [currentChallenge, setCurrentChallenge] = useState(null)
   const [sections, setSections] = useState([])
   const [sectionsStatus, setSectionsStatus] = useState([])
   const [totalCompleted, setTotalCompleted] = useState(0)
+  const [showModal, setShowModal] = useState(false)
+  const [completedChallenges, setCompletedChallenges] = useState(0)
 
+  // Reset game data when user logs out or logs in
   useEffect(() => {
-    const getSections = async () => {
-      try {
-        const { data } = await axios.get('/api/challenges/sections/')
-        setSections(data)
-      } catch (error) {
-        setError(error.response.data.detail)
-      }
+    if (!user) {
+      setError('')
+      setGame(null)
+      setGameDataFetched(false)
+      setCountdown(null)
+      setUserPoints(0)
+      setUserRank(0)
+      setGameInProgress(false)
+      setSections([])
+      setSectionsStatus([])
+      setTotalCompleted(0)
+      setShowModal(false)
+      setCompletedChallenges(0)
+    } else {
+      fetchActiveGame()
     }
-    const getSectionsStatus = async () => {
-      if (!isAuthenticated()) return
-      try {
-        const userToken = userTokenFunction()
-        const { data } = await axios.get('/api/games/active-challenges/', userToken)
-        setSectionsStatus(data)
-      } catch (error) {
-        setError(error.response.data.detail)
-        console.log(error.response.data.detail)
-      }
+  }, [user, isAuthenticated])
+
+  const getSections = async () => {
+    try {
+      const { data } = await axios.get('/api/challenges/sections/')
+      setSections(data)
+    } catch (error) {
+      setError(error.response.data.detail)
     }
-    getSections()
-    if (isAuthenticated()) {
-      getSectionsStatus()
+  }
+
+  const getSectionsStatus = async () => {
+    if (!isAuthenticated()) return
+    try {
+      const userToken = userTokenFunction()
+      const { data } = await axios.get('/api/games/active-challenges/', userToken)
+      setSectionsStatus(data)
+    } catch (error) {
+      setError(error.response.data.detail)
     }
-  }, [game, userPoints])
+  }
 
+  const checkAllChallengesCompleted = () => {
+    return sectionsStatus.length > 0 && sectionsStatus.every(section =>
+      section.themes.every(theme => theme.is_completed)
+    )
+  }
 
-
-  useEffect(() => {
-    if (game && challengesCompleted === 12) {
+  const handleModalDisplay = () => {
+    const allChallengesCompleted = checkAllChallengesCompleted()
+    if (allChallengesCompleted || countdown === 0) {
+      setCompletedChallenges(totalCompleted)
+      setShowModal(true)
+      setCountdown(null)
+      setGameDataFetched(false)
       setGameInProgress(false)
       updateUserGameStatus(true)
     }
-  }, [game, challengesCompleted])
+  }
 
-  const fetchUserRankAndPoints = async () => {
-    if (!game) {
+  useEffect(() => {
+    const newTotalCompleted = sectionsStatus.length > 0 ? sectionsStatus.reduce((acc, cur) => acc += cur.themes.filter((t) => t.is_completed).length, 0) : 0
+    setTotalCompleted(newTotalCompleted)
+  }, [sectionsStatus])
+
+  const fetchUserRankAndPoints = async (gameData = null) => {
+    const currentGame = gameData ? gameData : game
+    if (!currentGame) {
       return
     }
     try {
       const { data } = await axios.get('/api/leaderboard/')
       const userEntry = data.find(
-        (entry) => entry.user.id === user.id && entry.game === game.id
+        (entry) => entry.user.id === user.id && entry.game === currentGame.id
       )
       if (userEntry) {
         setUserPoints(userEntry.total_points)
         setUserRank(userEntry.user.rank)
       } else {
         setUserPoints(0)
-        setUserRank(data.length + 1)
+        setUserRank(0)
       }
       setGameDataFetched(true)
     } catch (error) {
       console.error('Error fetching leaderboard data', error)
     }
   }
-
-  useEffect(() => {
-    if (game && user && !gameDataFetched) {
-      fetchUserRankAndPoints()
-    }
-  }, [game, user, gameDataFetched, challengesCompleted, userPoints, userRank])
-
-
-  useEffect(() => {
-    if (user) {
-      setGame(null)
-      setGameDataFetched(false)
-      setChallengesCompleted(0)
-      setUserPoints(0)
-      setUserRank(0)
-      setCountdown(null)
-      setGameInProgress(false)
-      fetchActiveGame()
-    }
-  }, [user, isAuthenticated])
 
   const updateUserGameStatus = async (isCompleted, gameData = null) => {
     try {
@@ -118,7 +126,6 @@ const GameProvider = ({ children }) => {
     }
   }
 
-
   const fetchActiveGame = async () => {
     try {
       const userToken = userTokenFunction()
@@ -135,14 +142,12 @@ const GameProvider = ({ children }) => {
           setGame(data)
           setCountdown(remainingTime)
           setGameInProgress(true)
+          fetchUserRankAndPoints(data)
         } else {
-          if (game) {
-            updateUserGameStatus(true)
-          } else {
-            updateUserGameStatus(true, data)
-          }
+          updateUserGameStatus(true, data)
           setGame(null)
           setGameInProgress(false)
+          setSectionsStatus([])
         }
       }
     } catch (error) {
@@ -151,6 +156,9 @@ const GameProvider = ({ children }) => {
   }
 
   useEffect(() => {
+    if (game) {
+      handleModalDisplay()
+    }
     if (user && game && countdown > 0) {
       const timer = setTimeout(() => {
         setCountdown(countdown - 1)
@@ -158,8 +166,11 @@ const GameProvider = ({ children }) => {
       return () => clearTimeout(timer)
     } else if (user && game && countdown === 0) {
       if (isAuthenticated) {
+        setGameDataFetched(false)
         setGameInProgress(false)
-        updateUserGameStatus(true)
+        if (!showModal) {
+          updateUserGameStatus(true)
+        }
       }
     }
   }, [game, countdown, user])
@@ -168,13 +179,10 @@ const GameProvider = ({ children }) => {
   const createGame = async () => {
     try {
       const newSeed = Math.floor(Math.random() * 100000)
-      setSeed(newSeed)
-      console.log('SEED', newSeed)
       const userToken = userTokenFunction()
       const { data } = await axios.post('/api/games/', { seed: newSeed }, userToken)
       setGame(data)
-      setGameDataFetched(false)
-      fetchUserRankAndPoints()
+      fetchUserRankAndPoints(data)
       setTotalCompleted(0)
     } catch (error) {
       setError(error.response.data.detail)
@@ -182,7 +190,8 @@ const GameProvider = ({ children }) => {
   }
 
   return (
-    <GameContext.Provider value={{ seed, game, createGame, error, countdown, setCountdown, gameInProgress, setGameInProgress, challengesCompleted, setChallengesCompleted, userPoints, setUserPoints, userRank, setUserRank, fetchUserRankAndPoints, gameDataFetched, currentChallenge, setCurrentChallenge, sections, sectionsStatus, totalCompleted, setTotalCompleted }}>
+    <GameContext.Provider value={{ game, createGame, error, countdown, setCountdown, gameInProgress, setGameInProgress, userPoints, setUserPoints, userRank, setUserRank, fetchUserRankAndPoints, gameDataFetched, sections, sectionsStatus, totalCompleted, setTotalCompleted, getSections, getSectionsStatus, completedChallenges, setShowModal }}>
+      {showModal && <GameOutcome />}
       {children}
     </GameContext.Provider>
   )

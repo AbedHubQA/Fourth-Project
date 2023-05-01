@@ -4,13 +4,16 @@ import './styles/main.scss'
 import App from './App'
 import UserProvider from './UserProvider'
 import GameProvider from './GameProvider'
+import { BrowserRouter } from 'react-router-dom'
 
 const rootElement = document.getElementById('root')
 
 createRoot(rootElement).render(
-  <UserProvider>
-    <GameProvider>
-      <App />
-    </GameProvider>
-  </UserProvider>
+  <BrowserRouter>
+    <UserProvider>
+      <GameProvider>
+        <App />
+      </GameProvider>
+    </UserProvider>
+  </BrowserRouter>
 )

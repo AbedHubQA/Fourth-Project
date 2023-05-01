@@ -4,26 +4,14 @@ import UserContext from '../../UserContext'
 import axios from 'axios'
 
 const ChallengeBanner = () => {
-  const { game, totalCompleted, setTotalCompleted, createGame, countdown, setCountdown, gameInProgress, setGameInProgress, challengesCompleted, setChallengesCompleted, userPoints, setUserPoints, userRank, setUserRank, gameDataFetched, fetchUserRankAndPoints, userCountdowns, setUserCountdowns, sectionsStatus } = useContext(GameContext)
+  const { game, totalCompleted, setTotalCompleted, createGame, countdown, setCountdown, gameInProgress, setGameInProgress, challengesCompleted, userPoints, setUserPoints, userRank, setUserRank, gameDataFetched, fetchUserRankAndPoints, userCountdowns, setUserCountdowns, sectionsStatus } = useContext(GameContext)
   const { user } = useContext(UserContext)
 
   const startNewGame = async () => {
     await createGame()
     setGameInProgress(true)
-    setChallengesCompleted(0)
-    setCountdown(30)
+    setCountdown(120)
   }
-
-
-
-  useEffect(() => {
-    const newTotalCompleted = sectionsStatus.length > 0 ? sectionsStatus.reduce((acc, cur) => acc += cur.themes.filter((t) => t.is_completed).length, 0) : 0
-    console.log(newTotalCompleted)
-    setTotalCompleted(newTotalCompleted)
-    if (gameDataFetched) {
-      fetchUserRankAndPoints()
-    }
-  }, [userPoints, totalCompleted, countdown])
 
   const ordinalSuffix = (number) => {
     const lastDigit = number % 10
@@ -108,11 +96,11 @@ const ChallengeBanner = () => {
               <div
                 className="progress-bar"
                 style={{
-                  width: `${(totalCompleted / 12) * 100}%`,
+                  width: `${(totalCompleted / 8) * 100}%`,
                 }}
               ></div>
               <div className="progress-text">
-                {gameDataFetched ? `${totalCompleted}/12` : '-'}
+                {gameDataFetched ? `${totalCompleted}/8` : '-'}
               </div>
             </div>
           </div>

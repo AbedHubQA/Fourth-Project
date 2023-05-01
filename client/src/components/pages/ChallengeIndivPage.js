@@ -20,16 +20,14 @@ const themes = {
 
 const ChallengeIndivPage = () => {
 
-  const { seed, game, setCurrentChallenge, userPoints, setUserPoints, sectionsStatus, setTotalCompleted, totalCompleted, countdown } = useContext(GameContext)
+  const { seed, game, setCurrentChallenge, userPoints, setUserPoints, countdown, fetchUserRankAndPoints  } = useContext(GameContext)
 
   const [error, setError] = useState('')
   const [challenge, setChallenge] = useState()
   const [challengeState, setChallengeState] = useState(new Set())
   const [userAnswer, setUserAnswer] = useState('')
-  const [successMessage, setSuccessMessage] = useState('')
   const [totalScore, setTotalScore] = useState(1200)
   const [revealedSquares, setRevealedSquares] = useState(new Set())
-
 
   const gridSize = 25
 
@@ -50,6 +48,10 @@ const ChallengeIndivPage = () => {
   }, [countdown])
 
   const handleSubmit = async () => {
+    if (userAnswer.length === 0) {
+      setError('Please enter an answer.')
+      return
+    }
     try {
       const userToken = userTokenFunction()
       const { data } = await axios.post(
@@ -62,12 +64,9 @@ const ChallengeIndivPage = () => {
         },
         userToken
       )
-
       if (data.is_correct) {
-        console.log(totalCompleted + 1)
-        // setTotalCompleted(totalCompleted + 1)
-        setSuccessMessage('Congratulations! Your answer is correct.')
         setUserPoints(userPoints + data.points_scored)
+        fetchUserRankAndPoints()
         backToChallenges()
       } else {
         setError('Incorrect answer. Please try again.')
@@ -84,10 +83,6 @@ const ChallengeIndivPage = () => {
     if (!difficulties[difficulty] || !themes[theme]) {
       setError('Invalid difficulty/theme')
     }
-
-    // if (!game) {
-    //   setError('Game not started')
-    // }
   }, [])
 
   const getUserChallenge = async (userChallengeId) => {
@@ -120,16 +115,14 @@ const ChallengeIndivPage = () => {
           game_id: game.id,
           difficulty_id: difficulties[difficulty],
           theme_id: themes[theme],
-          seed: seed,
+          seed: game.seed,
         },
         userToken
       )
       setChallenge(data)
-      setCurrentChallenge(data)
       getUserChallenge(data.user_challenge_id)
-      console.log(data)
     } catch (error) {
-      setError(error.response.data.detail)
+      setError(error.response)
     }
   }
 
@@ -159,7 +152,6 @@ const ChallengeIndivPage = () => {
               gridSize={gridSize}
               difficulty={difficulty}
               theme={theme}
-              onSquareClick={(index) => console.log('Clicked square:', index)}
             />
             <div className="controls-and-error">
               <div className="game-controls">

@@ -15,24 +15,24 @@ const App = () => {
 
   return (
     <ThemeProvider theme={customTheme}>
-      <BrowserRouter>
-        <NavBar />
-        <Routes>
-          <Route path='/' element={<HomePage />} />
-          <Route path='/challenges' element={<RequireAuth redirectTo='/login' />}>
-            <Route index element={<ChallengesPage />} />
-          </Route>
-          <Route path='/challenge/:difficulty/:theme' element={<RequireAuth redirectTo='/login' />}>
-            <Route index element={<ChallengeIndivPage />} />
-          </Route>
-          <Route path='/leaderboard' element={<RequireAuth redirectTo='/login' />}>
-            <Route index element={<LeaderboardPage />} />
-          </Route>
-          <Route path='/login' element={<Login />} />
-          <Route path='/register' element={<Register />} />
-          <Route path='*' element={<PageNotFound />} />
-        </Routes>
-      </BrowserRouter>
+      {/* <BrowserRouter> */}
+      <NavBar />
+      <Routes>
+        <Route path='/' element={<HomePage />} />
+        <Route path='/challenges' element={<RequireAuth redirectTo='/login' />}>
+          <Route index element={<ChallengesPage />} />
+        </Route>
+        <Route path='/challenge/:difficulty/:theme' element={<RequireAuth redirectTo='/login' />}>
+          <Route index element={<ChallengeIndivPage />} />
+        </Route>
+        <Route path='/leaderboard' element={<RequireAuth redirectTo='/login' />}>
+          <Route index element={<LeaderboardPage />} />
+        </Route>
+        <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='*' element={<PageNotFound />} />
+      </Routes>
+      {/* </BrowserRouter> */}
     </ThemeProvider>
   )
 }

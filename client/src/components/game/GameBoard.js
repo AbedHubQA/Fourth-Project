@@ -65,8 +65,6 @@ const GameBoard = ({ challenge, challengeState, setChallengeState, imageURL, gri
     } catch (error) {
       console.error('Error updating revealed squares:', error)
     }
-
-    onSquareClick(index)
   }
 
 
